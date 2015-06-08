@@ -2,7 +2,8 @@
   "name": "the-neighbourhood-base",
   "version": "1.1.0",
   "browser": {
-    "waypoints": "./node_modules/waypoints/lib/noframework.waypoints.js"
+    "waypoints": "./node_modules/waypoints/lib/noframework.waypoints.js",
+    "owlCarousel": "./src/scripts/lib/owl-carousel/owl.carousel.js"
   },
   "devDependencies": {
     "browser-sync": "*",
