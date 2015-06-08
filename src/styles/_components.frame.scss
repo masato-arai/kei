@@ -1,0 +1,40 @@
+/* =======================
+   Components/Frame
+   ======================= */
+
+$border-width:       11px;
+
+.borderTop, .borderBottom, .borderLeft, .borderRight {
+    background-color: $base-background-color;
+    display: block;
+    position: fixed;
+    z-index: 1000;
+}
+
+.borderTop {
+    height: $border-width;
+    left: 0;
+    right: 0;
+    top: 0;
+}
+
+.borderRight {
+    bottom: 0;
+    right: 0;
+    top: 0;
+    width: $border-width;
+}
+
+.borderBottom {
+    bottom: 0;
+    height: $border-width;
+    left: 0;
+    right: 0;
+}
+
+.borderLeft {
+    bottom: 0;
+    left: 0;
+    top: 0;
+    width: $border-width;
+}

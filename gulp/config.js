@@ -10,7 +10,7 @@ module.exports = {
             "!" + dest + "/**.map",
             templates + "/**"
         ],
-        proxy: 'base.app'
+        proxy: 'kei.app'
     },
     sass: {
         src: src + '/styles',

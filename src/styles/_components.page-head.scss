@@ -3,5 +3,26 @@
    ======================= */
 
 .page-head {
+    background: $base-background-color;
+    position: absolute;
+    top: 0;
+    padding: $spacing-unit;
+    padding-top: $spacing-unit--large;
+    width: 100%;
+}
 
+
+.page-head--contents {
+    h1 {
+        color: $base-text-color;
+        text-align: center;
+        margin-bottom: $spacing-unit--small;
+        @include font-size(24px);
+    }
+
+    h2 {
+        color: $color-grey;
+        text-align: center;
+        @include font-size(16px);
+    }
 }
