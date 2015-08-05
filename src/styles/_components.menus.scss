@@ -10,10 +10,11 @@ ul.page-head--menus {
     li.item {
         background: url(/assets/images/menuSeparator.png) no-repeat scroll 0px 9px transparent;
         display:inline-block;
+        letter-spacing: .08em;
         list-style: none;
         padding-left: $spacing-unit * 3;
         padding-right: $spacing-unit * 3;
-        @include font-size(14px);
+        @include font-size(15px);
 
         a {
             color: $color-white;

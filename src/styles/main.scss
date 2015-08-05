@@ -68,11 +68,14 @@
 /**
  * #COMPONENTS
  */
+@import "components.flickity";
+@import "components.flickity-overwrite";
 @import "components.frame";
 @import "components.page-head";
 @import "components.menus";
 @import "components.sections";
 @import "components.home-news";
+@import "components.home-carousel";
 
 
 

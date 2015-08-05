@@ -56,6 +56,8 @@
     "watchify": "*"
   },
   "dependencies": {
+    "fastclick": "^1.0.6",
+    "flickity": "^1.1.0",
     "jquery": "*",
     "velocity-animate": "^1.2.2",
     "viewport-units-buggyfill": "^0.5.3",

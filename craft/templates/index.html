@@ -21,19 +21,17 @@
 
 {% block content %}
 <section class="home">
-    <div class="home--news">
-        <p>NEWS<span>New work: Keiichi Matsuda X BVLGARI, Vedute Di Roma</span></p>
+    <div class="home__news">
+        <span class="news__title">News</span>
+        <span class="news__item">
+            <a href="">New work: Keiichi Matsuda X BVLGARI, Vedute Di Roma</a>
+        </span>
     </div>
-    <div class="home--carousel">
-        <div class="owl-carousel">
-            <div> Your Content </div>
-            <div> Your Content </div>
-            <div> Your Content </div>
-            <div> Your Content </div>
-            <div> Your Content </div>
-            <div> Your Content </div>
-            <div> Your Content </div>
-        </div>
+    <div class="home-carousel">
+        <div class="home-carousel__static-banner">Static banner 2</div>
+        <div class="home-carousel__cell"><img src="/assets/images/045.png" class="home-carousel__img" /></div>
+        <div class="home-carousel__cell"><img src="/assets/images/bulgari_06.jpg" class="home-carousel__img" /></div>
+        <div class="home-carousel__cell"><img src="/assets/images/kick_image.png" class="home-carousel__img" /></div>
     </div>
 </section>
 {% endblock %}
