@@ -6,6 +6,11 @@ ul.page-head--menus {
     color: $color-white;
     text-align: center;
     margin: 0;
+    visibility: hidden;
+
+    @include media-query(lap-and-up) {
+        visibility: visible;
+    }
 
     li.item {
         background: url(/assets/images/menuSeparator.png) no-repeat scroll 0px 7px transparent;

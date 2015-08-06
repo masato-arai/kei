@@ -4,4 +4,8 @@
 
 section {
     margin-top: $spacing-unit--tiny * 29;
+
+    &.home {
+        position: relative;
+    }
 }

@@ -4,12 +4,14 @@
 
 .home__news {
     background: $color-grey;
-    display: table;
     padding-top: $spacing-unit--tiny;
     padding-bottom: $spacing-unit--tiny;
     padding-left: $spacing-unit;
     padding-right: $spacing-unit;
+    position: absolute;
+    top: 0;
     width: 100%;
+    z-index: 100;
 
     span {
         color: $color-black;
@@ -22,19 +24,18 @@
     }
 
         .news__title {
-            display: table-cell;
-            padding-top: 5px;
+            padding-top: 4px;
+            position: absolute;
             text-transform: uppercase;
-            vertical-align: middle;
             @include font-size(18px, 18px);
         }
     
         .news__item {
             display: table-cell;
             vertical-align: middle;
-            padding-left: $spacing-unit--tiny;
+            padding-left: $spacing-unit--small * 5;
             padding-top: 4px;
-            @include font-size(16px, 16px);
+            @include font-size(16px, 17px);
             
             a {
                 color: $color-black;
