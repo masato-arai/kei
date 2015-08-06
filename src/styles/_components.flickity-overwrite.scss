@@ -1,8 +1,55 @@
-.flickity-prev-next-button {
-    border-radius: 50%;
-    bottom: 0;
-    height: 30px;
-    top: inherit;
-    transform: translateY(-2px);
-    width: 30px;
+.home-carousel {
+    .flickity-prev-next-button {
+        backface-visibility: hidden !important;
+        border-radius: 0;
+        bottom: 0;
+        top: inherit;
+        transform: translateY(-2px);
+        bottom: 0;
+        background: transparent;
+        top: inherit;
+        transform: translateY(-2px);
+        opacity: 1;
+
+        &:hover {
+            background: transparent;
+        }
+    }
+    
+    .flickity-prev-next-button.previous {
+        border-bottom: 40px solid $color-black;
+        border-left: 0 solid $color-black;
+        border-right: 45px solid transparent;
+        padding-left: 20px;
+        width: 60px;
+    }
+    
+    .flickity-prev-next-button.next {
+        border-bottom: 40px solid $color-black;
+        border-left: 45px solid transparent;
+        border-right: 0 solid $color-black;
+        padding-left: 20px;
+        width: 320px;
+    }
+    
+    .flickity-prev-next-button .arrow {
+        fill: $color-white;
+    }
+    
+    .flickity-prev-next-button svg {
+        position: absolute;
+        z-index: 10000;
+        width: 20px;
+        height: 20px;
+    }
+    .flickity-prev-next-button.previous svg {
+        left: 10px;
+        top: 18px;
+    }
+    
+    .flickity-prev-next-button.next svg {
+        right: 10px;
+        top: 18px;
+        width: 400px;
+    }
 }
