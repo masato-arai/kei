@@ -13,6 +13,7 @@ var init = function() {
         friction: 0.15
     });
 
+/*
     var $caption = $('.caption');
     // Flickity instance
     var $caption = flkty.data('flickity');
@@ -21,6 +22,7 @@ var init = function() {
         // set image caption using img's alt
         $caption.text( flkty.selectedElement.alt )
     });
+*/
 }
 
 exports.init = init;

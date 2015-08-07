@@ -9,3 +9,4 @@ var attachFastClick = require('fastclick');
 attachFastClick(document.body);
 
 require('./modules/home-carousel').init();
+require('./modules/toggle-menu').init();

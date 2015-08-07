@@ -21,7 +21,11 @@
         border-left: 0 solid $color-black;
         border-right: 45px solid transparent;
         padding-left: 20px;
-        width: 60px;
+        width: 50%;
+
+        @include media-query(mobile-and-up) {
+            width: 60px;
+        }
     }
     
     .flickity-prev-next-button.next {
@@ -44,7 +48,7 @@
     }
     .flickity-prev-next-button.previous svg {
         left: 10px;
-        top: 18px;
+        top: 20px;
     }
     
     .flickity-prev-next-button.next svg {
