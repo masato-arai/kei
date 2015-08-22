@@ -21,6 +21,7 @@
         border-left: 0 solid $color-black;
         border-right: 45px solid transparent;
         padding-left: 20px;
+        left: 0;
         width: 50%;
 
         @include media-query(mobile-and-up) {
@@ -33,6 +34,7 @@
         border-left: 45px solid transparent;
         border-right: 0 solid $color-black;
         padding-left: 20px;
+        right: 0;
         width: 320px;
     }
     

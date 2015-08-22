@@ -2,39 +2,38 @@
    Components/Frame
    ======================= */
 
-$border-width:       11px;
+$frame-width: $spacing-unit--small;
 
-.borderTop, .borderBottom, .borderLeft, .borderRight {
+.frame {
     background-color: $base-background-color;
     display: block;
     position: fixed;
     z-index: 1000;
 }
 
-.borderTop {
-    height: $border-width;
-    left: 0;
-    right: 0;
-    top: 0;
+.frameBottom {
+    height: $frame-width;
 }
 
-.borderRight {
-    bottom: 0;
-    right: 0;
-    top: 0;
-    width: $border-width;
+.frameLeft, .frameRight {
+    width: $frame-width;
 }
 
-.borderBottom {
+.frameLeft, .frameRight {
+    top: 0;
     bottom: 0;
-    height: $border-width;
-    left: 0;
+}
+
+.frameRight {
     right: 0;
 }
 
-.borderLeft {
+.frameBottom {
     bottom: 0;
     left: 0;
-    top: 0;
-    width: $border-width;
+    right: 0;
+}
+
+.frameLeft {
+    left: 0;
 }
