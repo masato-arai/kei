@@ -4,11 +4,10 @@
         border-radius: 0;
         bottom: 0;
         top: inherit;
-        transform: translateY(-2px);
         bottom: 0;
         background: transparent;
         top: inherit;
-        transform: translateY(-2px);
+        transform: translateY(0);
         opacity: 1;
 
         &:hover {
@@ -19,23 +18,28 @@
     .flickity-prev-next-button.previous {
         border-bottom: 40px solid $color-black;
         border-left: 0 solid $color-black;
-        border-right: 45px solid transparent;
+        border-right: 0px solid;
         padding-left: 20px;
         left: 0;
-        width: 50%;
+        width: 52%;
 
         @include media-query(mobile-and-up) {
             width: 60px;
+            border-right: 45px solid transparent;
         }
     }
     
     .flickity-prev-next-button.next {
         border-bottom: 40px solid $color-black;
-        border-left: 45px solid transparent;
+        border-left: 0px;
         border-right: 0 solid $color-black;
         padding-left: 20px;
         right: 0;
-        width: 320px;
+        width: 220px;
+        @include media-query(mobile-and-up) {
+            border-left: 45px solid transparent;
+            width: 320px;
+        }
     }
     
     .flickity-prev-next-button .arrow {
@@ -47,6 +51,10 @@
         z-index: 10000;
         width: 20px;
         height: 20px;
+        left: 0;
+        @include media-query(mobile-and-up) {
+            left: 20%;
+        }
     }
     .flickity-prev-next-button.previous svg {
         left: 10px;
@@ -55,7 +63,7 @@
     
     .flickity-prev-next-button.next svg {
         right: 10px;
-        top: 18px;
+        top: 20px;
         width: 400px;
     }
 }
