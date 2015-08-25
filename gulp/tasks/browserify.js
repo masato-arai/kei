@@ -50,7 +50,7 @@ gulp.task('browserify', function(callback) {
                 // Convert from streaming to buffered vinyl file object
                 .pipe(buffer())
                 // Now gulp-uglify works
-                .pipe(uglify())
+//                .pipe(uglify())
                 // Specify the output destination
                 .pipe(gulp.dest(bundleConfig.dest))
                 .on('end', reportFinished);
