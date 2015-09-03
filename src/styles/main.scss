@@ -67,6 +67,8 @@ $breakpoints: (
  */
 @import "objects.wrappers";
 @import "../../node_modules/inuit-buttons/objects.buttons";
+
+$inuit-enable-layout--small:        true;
 @import "../../node_modules/inuit-layout/objects.layout";
 @import "../../node_modules/inuit-box/objects.box";
 @import "../../node_modules/inuit-media/objects.media";
@@ -89,6 +91,8 @@ $breakpoints: (
 @import "components.home-news";
 @import "components.home-carousel";
 @import "components.projects";
+@import "components.trapeziums";
+@import "components.thumbs";
 
 
 

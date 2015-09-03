@@ -10,3 +10,4 @@ attachFastClick(document.body);
 
 require('./modules/home-carousel').init();
 require('./modules/toggle-menu').init();
+require('./modules/accordion').init();

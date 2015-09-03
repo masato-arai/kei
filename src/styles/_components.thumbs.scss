@@ -1,0 +1,28 @@
+/* =======================
+   Components/Captions
+   ======================= */
+.thumbs {
+    margin-bottom: $spacing-unit--small;
+    position: relative;
+}
+
+    .thumbs__item {
+        display: block;
+        background-size: 100%;
+    }
+
+        .thumbs__image {
+            opacity: 1;
+            transition: all 200ms ease;
+            
+            &:hover {
+                opacity: 0;
+            }
+        }
+
+        .thumbs__label {
+            color: $color-white;
+            font-weight: 500;
+            margin-bottom: 0;
+            @include font-size(12px, 1.2);
+        }
