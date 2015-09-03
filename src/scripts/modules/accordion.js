@@ -1,12 +1,19 @@
 var init = function() {
-    var  $accordion = $('.accordion-js');
-    $accordion.find('div').css({ display : 'none', overflow : 'hidden'});
+    var $accordion = $('.accordion');
+    var $accordionContents = $('.accordion__contents');
+    var $accordionItem = $('.accordion__item');
+    var $accordionTitle = $('.accordion__title');
+
+    $accordion.find($accordionContents).css({
+        display: 'none',
+        overflow: 'hidden'
+    });
     
-    $accordion.children('dt').click(function() {
+    $accordion.children($accordionTitle).on('click', function() {
         var $this = $(this);
-        var $targetContainer =  $this.next('div');
-        var $targetDescription =  $targetContainer.find('dd').first();
-        $('.accordion-element__term').removeClass('active');
+        var $targetContainer =  $this.find($accordionContents);
+        var $targetDescription =  $targetContainer.find($accordionItem).first();
+        $accordionTitle.removeClass('active');
         $this.toggleClass('active');
         
         if(!$targetDescription.hasClass('active')) {

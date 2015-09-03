@@ -4,6 +4,7 @@
 @import "../../node_modules/inuit-defaults/settings.defaults";
 @import "settings.global";
 @import "settings.colors";
+@import "settings.max-width";
 $breakpoints: (
         "mobile"        "screen and (max-width: 479px)",
         "mobile-and-up" "screen and (min-width: 480px)",
@@ -93,6 +94,7 @@ $inuit-enable-layout--small:        true;
 @import "components.projects";
 @import "components.trapeziums";
 @import "components.thumbs";
+@import "components.accordion";
 
 
 
