@@ -56,6 +56,7 @@ $breakpoints: (
 @import "../../node_modules/inuit-headings/base.headings";
 @import "base.type";
 @import "base.links";
+@import "base.paragraph";
 @import "../../node_modules/inuit-lists/base.lists";
 @import "../../node_modules/inuit-images/base.images";
 
@@ -95,6 +96,7 @@ $inuit-enable-layout--small:        true;
 @import "components.trapeziums";
 @import "components.thumbs";
 @import "components.accordion";
+@import "components.studio";
 
 
 

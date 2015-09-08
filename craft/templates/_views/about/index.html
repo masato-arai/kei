@@ -4,9 +4,24 @@
 
 <section class="about">
     <div class="accordion">
-        <div class="accordion__wrapper">
+        <div class="accordion__wrapper" style="background: #{{ entry.studioColor }};">
             <div class="accordion__inner-wrapper">
                 <h3 class="accordion__title">Studio</h2>
+                <div class="accordion__contents">
+                    <div class="accordion__item  studio">
+                        <div class="studio__item">
+                            <img class="studio__image" src="{{ entry.studioImage.first().url }}" />
+                        </div>
+                        {% if entry.studioTexts | length %}
+                            {{ entry.studioTexts }}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="accordion__wrapper" style="background: #{{ entry.selectedClientsColor }};">
+            <div class="accordion__inner-wrapper">
+                <h3 class="accordion__title">Selected clients</h2>
                 <div class="accordion__contents">
                     <div class="accordion__item">
                         <a href="#">Project 1</a>
@@ -18,9 +33,9 @@
                 </div>
             </div>
         </div>
-        <div class="accordion__wrapper">
+        <div class="accordion__wrapper" style="background: #{{ entry.awardsColor }};">
             <div class="accordion__inner-wrapper">
-                <h3 class="accordion__title">Studio</h2>
+                <h3 class="accordion__title">Awards</h2>
                 <div class="accordion__contents">
                     <div class="accordion__item">
                         <a href="#">Project 1</a>
@@ -32,9 +47,9 @@
                 </div>
             </div>
         </div>
-        <div class="accordion__wrapper">
+        <div class="accordion__wrapper" style="background: #{{ entry.speakingAndConsultancyColor }};">
             <div class="accordion__inner-wrapper">
-                <h3 class="accordion__title">Studio</h2>
+                <h3 class="accordion__title">Speaking and consultancy</h2>
                 <div class="accordion__contents">
                     <div class="accordion__item">
                         <a href="#">Project 1</a>
@@ -46,9 +61,9 @@
                 </div>
             </div>
         </div>
-        <div class="accordion__wrapper">
+        <div class="accordion__wrapper" style="background: #{{ entry.exhibitionsAndScreeningsColor }};">
             <div class="accordion__inner-wrapper">
-                <h3 class="accordion__title">Studio</h2>
+                <h3 class="accordion__title">Exhibitions and screenings</h2>
                 <div class="accordion__contents">
                     <div class="accordion__item">
                         <a href="#">Project 1</a>
@@ -60,23 +75,9 @@
                 </div>
             </div>
         </div>
-        <div class="accordion__wrapper">
+        <div class="accordion__wrapper" style="background: #{{ entry.selectedPressColor }};">
             <div class="accordion__inner-wrapper">
-                <h3 class="accordion__title">Studio</h2>
-                <div class="accordion__contents">
-                    <div class="accordion__item">
-                        <a href="#">Project 1</a>
-                        <a href="#">Project 2</a>
-                        <a href="#">Project 3</a>
-                        <a href="#">Project 4</a>
-                        <a href="#">Project 5</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="accordion__wrapper">
-            <div class="accordion__inner-wrapper">
-                <h3 class="accordion__title">Studio</h2>
+                <h3 class="accordion__title">Selected press</h2>
                 <div class="accordion__contents">
                     <div class="accordion__item">
                         <a href="#">Project 1</a>
