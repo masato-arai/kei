@@ -3,7 +3,26 @@
    ======================= */
 
 .page-foot {
-    background: grey;
-    padding: $spacing-unit--small;
+    background: $footer-color;
+    padding-top: $spacing-unit--large;
+    padding-bottom: $spacing-unit--large;
+    position: relative;
     width: 100%;
 }
+
+    .page-foot__wrapper {
+        max-width: $max-width;
+        padding-left: $spacing-unit;
+        padding-right: $spacing-unit;
+    }
+
+        .page-foot__item {
+            p {
+                color: $color-white;
+                font-family: Garamond, Palatino Linotype, Palatino, serif;
+                font-size: 14px;
+                letter-spacing: .08em;
+                margin-top: 0;
+                line-height: 1.6em;
+            }
+        }

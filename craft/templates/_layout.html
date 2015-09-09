@@ -59,27 +59,53 @@
     {% endblock %}
     
     <footer class="page-foot">
-        <div class="wrapper page-foot--wrapper">
-            Footer here
+        <div class="page-foot__arrow"></div>
+        <div class="wrapper page-foot__wrapper">
+            <div class="layout  layout--huge">
+                <div class="layout__item  u-1/1  u-1/2-lap-and-up">
+                    <div class="page-foot__item  page-foot__quotes">
+                        {% if footer.quotes | length %}
+                            {% for block in footer.quotes %}
+                                {{ block.quote }}
+                                {{ block.author }}
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="page-foot__item  page-foot__mailchimp">
+                        <h3>Sign up to mailing list</h3>
+                    </div>
+                    <div class="page-foot__item  page-foot__ltd">
+                        {{ footer.keiichiMatsudaLtd}}
+                    </div>
+                    <div class="page-foot__item  page-foot__copy-right">
+                        {{ footer.copyright }}
+                    </div>
+                </div><div class="layout__item  u-1/1  u-1/2-lap-and-up">
+                    <div class="page-foot__contact">
+                        <h3>Contact</h3>
+                        <div class="page-foot__item  page-foot__contact-copy">
+                            {{ footer.contactCopy }}
+                        </div>
+                        <div class="page-foot__item  page-foot__contact-details">
+                            <ul>
+                                <li>T : {{ footer.contactTel }}</li>
+                                <li>E : {{ footer.contactEmail }}</li>
+                                {% if footer.contactTwitter | length %}
+                                    {% for block in footer.contactTwitter %}
+                                        <li>Twitter : <a href="{{ block.twitterLink }}" target="_blank">{{ block.twitterAccount }}</a></li>
+                                    {% endfor %}
+                                {% endif %}
+                            </ul>
+                        </div>
+                        <div class="page-foot__item  page-foot__twitter-widget">
+                            Twitter widget here
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </footer>
     
     <script src="/scripts/main.js"></script>
-
-    {% if craft.config.environment == "production" %}
-        <script>
-            var _gaq = _gaq || [];
-            _gaq.push(['_setAccount', 'UA-XXXXXXXX-1']);
-            _gaq.push(['_trackPageview']);
-            (function () {
-                var ga = document.createElement('script');
-                ga.type = 'text/javascript';
-                ga.async = true;
-                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-                var s = document.getElementsByTagName('script')[0];
-                s.parentNode.insertBefore(ga, s);
-            })();
-        </script>
-    {% endif %}
 </body>
 </html>
