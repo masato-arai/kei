@@ -1,9 +1,21 @@
 /* =======================
    Components/Studio
    ======================= */
-.studio__image {
-    width: 209px;
-    height: 300px;
-    float: left;
-    margin: 0 $spacing-unit--large $spacing-unit--small 0;
+.studio p {
+    @include media-query(lap-and-up) {
+        padding-bottom: $spacing-unit--large * 2;
+    }
 }
+
+    .studio__image {
+        width: auto;
+        max-width: 210px;
+        display: block;
+        margin: 0 auto;
+        padding-bottom: $spacing-unit--large;
+        @include media-query(lap-and-up) {
+            float: left;
+            margin: 0 $spacing-unit--large $spacing-unit--small 0;
+            padding-bottom: 0;
+        }
+    }

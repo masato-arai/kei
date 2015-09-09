@@ -4,7 +4,6 @@
 
 p {
     color: $color-black;
-//     font-family: Garamond, Palatino Linotype, Palatino, serif;
     letter-spacing: .06em;
     @include font-size(14px, 2.0);
 }
