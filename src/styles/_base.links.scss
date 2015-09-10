@@ -4,6 +4,7 @@
 
 a {
     text-decoration: none;
+    position: relative;
 
     @include attention() {
         text-decoration: underline;
