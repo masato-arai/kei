@@ -7,7 +7,7 @@
         <div class="accordion__wrapper" style="background: #{{ entry.studioColor }};">
             <div class="accordion__inner-wrapper">
                 <div class="accordion__header">
-                    <h3 class="accordion__title">Studio</h3>
+                    <h3 class="accordion__title">{{ entry.studioTitle }}</h3>
                 </div>
                 <div class="accordion__contents">
                     <div class="accordion__item  studio">
@@ -24,15 +24,15 @@
         <div class="accordion__wrapper" style="background: #{{ entry.selectedClientsColor }};">
             <div class="accordion__inner-wrapper">
                 <div class="accordion__header">
-                    <h3 class="accordion__title">Selected clients</h3>
+                    <h3 class="accordion__title">{{ entry.selectedClientsTitle }}</h3>
                 </div>
                 <div class="accordion__contents">
                     <div class="accordion__item">
-                        <a href="#">Project 1</a>
-                        <a href="#">Project 2</a>
-                        <a href="#">Project 3</a>
-                        <a href="#">Project 4</a>
-                        <a href="#">Project 5</a>
+                        {% if footer.contactTwitter | length %}
+                            {% for block in footer.contactTwitter %}
+                                {{ block.twitterAccount }}
+                            {% endfor %}
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -40,7 +40,7 @@
         <div class="accordion__wrapper" style="background: #{{ entry.awardsColor }};">
             <div class="accordion__inner-wrapper">
                 <div class="accordion__header">
-                    <h3 class="accordion__title">Awards</h3>
+                    <h3 class="accordion__title">{{ entry.awardsTitle }}</h3>
                 </div>
                 <div class="accordion__contents">
                     <div class="accordion__item">
@@ -56,7 +56,7 @@
         <div class="accordion__wrapper" style="background: #{{ entry.speakingAndConsultancyColor }};">
             <div class="accordion__inner-wrapper">
                 <div class="accordion__header">
-                    <h3 class="accordion__title">Speaking and consultancy</h3>
+                    <h3 class="accordion__title">{{ entry.speakingAndConsultancyTitle }}</h3>
                 </div>
                 <div class="accordion__contents">
                     <div class="accordion__item">
@@ -72,7 +72,7 @@
         <div class="accordion__wrapper" style="background: #{{ entry.exhibitionsAndScreeningsColor }};">
             <div class="accordion__inner-wrapper">
                 <div class="accordion__header">
-                    <h3 class="accordion__title">Exhibitions and screenings</h3>
+                    <h3 class="accordion__title">{{ entry.exhibitionsAndScreeningsTitle }}</h3>
                 </div>
                 <div class="accordion__contents">
                     <div class="accordion__item">
@@ -88,7 +88,7 @@
         <div class="accordion__wrapper" style="background: #{{ entry.selectedPressColor }};">
             <div class="accordion__inner-wrapper">
                 <div class="accordion__header">
-                    <h3 class="accordion__title">Selected press</h3>
+                    <h3 class="accordion__title">{{ entry.selectedPressTitle }}</h3>
                 </div>
                 <div class="accordion__contents">
                     <div class="accordion__item">
