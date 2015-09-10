@@ -58,21 +58,24 @@
     {% block content %}
     {% endblock %}
     
+    <div class="page-foot__arrow"></div>
     <footer class="page-foot">
-        <div class="page-foot__arrow"></div>
         <div class="wrapper page-foot__wrapper">
-            <div class="layout  layout--huge">
+            <div class="layout  layout--large">
                 <div class="layout__item  u-1/1  u-1/2-lap-and-up">
                     <div class="page-foot__item  page-foot__quotes">
                         {% if footer.quotes | length %}
                             {% for block in footer.quotes %}
-                                {{ block.quote }}
-                                {{ block.author }}
+                                <p class="quotes">{{ block.quote }}</p>
+                                <div class="quotes  quotes--author">- {{ block.author }}</div>
                             {% endfor %}
                         {% endif %}
                     </div>
                     <div class="page-foot__item  page-foot__mailchimp">
-                        <h3>Sign up to mailing list</h3>
+                        <h3 class="page-foot__header">Sign up to mailing list</h3>
+                        <div class="mailchimp__form">
+                            {% include 'partials/_mailchimp' %}
+                        </div>
                     </div>
                     <div class="page-foot__item  page-foot__ltd">
                         {{ footer.keiichiMatsudaLtd}}
@@ -82,7 +85,7 @@
                     </div>
                 </div><div class="layout__item  u-1/1  u-1/2-lap-and-up">
                     <div class="page-foot__contact">
-                        <h3>Contact</h3>
+                        <h3 class="page-foot__header  page-foot__header--contact">Contact</h3>
                         <div class="page-foot__item  page-foot__contact-copy">
                             {{ footer.contactCopy }}
                         </div>
@@ -98,7 +101,7 @@
                             </ul>
                         </div>
                         <div class="page-foot__item  page-foot__twitter-widget">
-                            Twitter widget here
+                            <a class="twitter-timeline" width="100%" height="200px" data-theme="dark" data-border-color="#fff" data-link-color="#fff" data-chrome="noheader nofooter transparent" data-tweet-limit="2" href="https://twitter.com/keiichiban" data-widget-id="398260652914917376">Tweets by @keiichiban</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
                         </div>
                     </div>
                 </div>

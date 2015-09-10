@@ -137,3 +137,14 @@ mark {
 .text-banner {
     text-align: center;
 }
+
+
+
+
+
+/**
+ * Form.
+ */
+textarea:focus, input:focus{
+    outline: 0;
+}

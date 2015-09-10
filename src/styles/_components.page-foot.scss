@@ -10,19 +10,83 @@
     width: 100%;
 }
 
+    .page-foot__arrow {
+        background: url(/assets/images/footer-arrow.png);
+        cursor: pointer;
+        height: 30px;
+        margin: 0 auto;
+        width: 60px;
+    }
+
     .page-foot__wrapper {
         max-width: $max-width;
         padding-left: $spacing-unit;
         padding-right: $spacing-unit;
     }
 
-        .page-foot__item {
-            p {
-                color: $color-white;
-                font-family: Garamond, Palatino Linotype, Palatino, serif;
-                font-size: 14px;
-                letter-spacing: .08em;
-                margin-top: 0;
-                line-height: 1.6em;
+        .page-foot__header {
+            text-align: center;
+            text-transform: uppercase;
+            margin-bottom: $spacing-unit--small;
+            @include font-size(20px);
+            @include media-query(lap-and-up) {
+                text-align: left;
+            }
+        }
+
+        .page-foot__item p {
+            color: $color-white;
+            font-family: $serif;
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: .08em;
+            line-height: 1.6em;
+            margin-top: 0;
+            text-align: center;
+            @include media-query(lap-and-up) {
+                text-align: left;
+            }
+        }
+
+        .page-foot__quotes {
+            margin-bottom: $spacing-unit--small * 3;
+        }
+
+        .page-foot__copy-right {
+            margin-bottom: $spacing-unit--small * 3;
+            @include media-query(lap-and-up) {
+                margin-bottom: $spacing-unit;
+            }
+        }
+
+        .page-foot__contact-copy p {
+            font-family: $sans-serif;
+            font-weight: $normal-weight;
+            margin-bottom: $spacing-unit--small * 3;
+        }
+
+        .page-foot__contact-details {
+            margin-bottom: $spacing-unit--small * 3;
+        }
+
+            .page-foot__contact-details li {
+                margin-bottom: $spacing-unit--small;
+                text-align: center;
+                @include media-query(lap-and-up) {
+                    text-align: left;
+                }
+            }
+
+                .page-foot__contact-details li a {
+                    color: $color-white;
+                }
+
+        .page-foot__twitter-widget {
+            border-top: 1px solid $color-white;
+            max-width: 520px;
+            margin: 0 auto;
+            
+            @include media-query(lap-and-up) {
+                margin: inherit;
             }
         }

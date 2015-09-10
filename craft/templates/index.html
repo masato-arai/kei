@@ -32,9 +32,14 @@
             <span class="caption  caption--title">Featured Project</span>
             <span class="caption  caption--project">Hyper Reality</span>
         </div>
-        <div class="home-carousel__cell"><img src="/assets/images/045.png" class="home-carousel__img" alt="045" /></div>
-        <div class="home-carousel__cell"><img src="/assets/images/bulgari_06.jpg" class="home-carousel__img" alt="bulgari"  /></div>
-        <div class="home-carousel__cell"><img src="/assets/images/kick_image.png" class="home-carousel__img" alt="kick"  /></div>
+
+        {% if entry.homeCarousel | length %}
+            {% for block in entry.homeCarousel %}
+                <div class="home-carousel__cell">
+                    <img src="{{ block.image.first().getUrl() }}" class="home-carousel__img" alt="045" />
+                </div>
+            {% endfor %}
+        {% endif %}
     </div>
 </section>
 {% endblock %}

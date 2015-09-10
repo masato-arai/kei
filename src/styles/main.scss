@@ -3,6 +3,7 @@
  */
 @import "../../node_modules/inuit-defaults/settings.defaults";
 @import "settings.global";
+@import "settings.fonts";
 @import "settings.colors";
 @import "settings.max-width";
 $breakpoints: (
@@ -72,6 +73,7 @@ $breakpoints: (
 @import "../../node_modules/inuit-buttons/objects.buttons";
 
 $inuit-enable-layout--small:        true;
+$inuit-enable-layout--large:        true;
 @import "../../node_modules/inuit-layout/objects.layout";
 @import "../../node_modules/inuit-box/objects.box";
 @import "../../node_modules/inuit-media/objects.media";
@@ -96,9 +98,12 @@ $inuit-enable-layout--small:        true;
 @import "components.projects";
 @import "components.trapeziums";
 @import "components.thumbs";
+@import "components.about";
 @import "components.accordion";
 @import "components.studio";
 @import "components.page-foot";
+@import "components.quotes";
+@import "components.mailchimp";
 
 
 
