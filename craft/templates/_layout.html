@@ -47,9 +47,9 @@
                 <h2>CRITICAL DESIGN</h2>
                 <div class="page-head--toggle"></div>
                 <ul class="page-head--menus">
-                    <li class="item"><a href="{{ siteUrl }}">HOME</a></li>
-                    <li class="item"><a href="/projects">PROJECTS</a></li>
-                    <li class="item"><a href="/about">ABOUT</a></li>
+                    <li class="menu__item"><a href="{{ siteUrl }}" class="menu__link  hover--border-up">HOME</a></li>
+                    <li class="menu__item"><a href="/projects" class="menu__link  hover--border-up">PROJECTS</a></li>
+                    <li class="menu__item"><a href="/about" class="menu__link  hover--border-up">ABOUT</a></li>
                 </ul>
             </div>
         </div>
@@ -92,10 +92,10 @@
                         <div class="page-foot__item  page-foot__contact-details">
                             <ul>
                                 <li>T : {{ footer.contactTel }}</li>
-                                <li>E : {{ footer.contactEmail }}</li>
+                                <li>E : <a href="mailto:{{ footer.contactEmail }}" class="page-foot__link  hover--border-up">{{ footer.contactEmail }}</a></li>
                                 {% if footer.contactTwitter | length %}
                                     {% for block in footer.contactTwitter %}
-                                        <li>Twitter : <a href="{{ block.twitterLink }}" target="_blank">{{ block.twitterAccount }}</a></li>
+                                        <li>Twitter : <a href="{{ block.twitterLink }}" target="_blank" class="page-foot__link  hover--border-up">{{ block.twitterAccount }}</a></li>
                                     {% endfor %}
                                 {% endif %}
                             </ul>

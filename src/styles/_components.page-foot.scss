@@ -56,6 +56,13 @@
             }
         }
 
+            .page-foot__link {
+                color: $color-white;
+                &::after {
+                    background-color: $color-white;
+                }
+            }
+
         .page-foot__quotes {
             margin-bottom: $spacing-unit--small * 3;
         }

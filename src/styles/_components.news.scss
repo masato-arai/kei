@@ -1,0 +1,37 @@
+/* =======================
+   Components/News
+   ======================= */
+
+.news__wrapper {
+    margin-bottom: 0;
+}
+
+    .news__title {
+        padding-top: 4px;
+        position: absolute;
+        text-transform: uppercase;
+        @include font-size(18px, 18px);
+    }
+
+    .news__item {
+        display: table-cell;
+        vertical-align: middle;
+        padding-left: $spacing-unit--small * 5;
+        padding-top: 4px;
+        @include font-size(16px, 17px);
+    }
+
+    .news__link {
+        color: $color-black;
+        transition: all 200ms ease;
+
+        &:hover {
+            color: $color-darkgrey;
+        }
+        &::after {
+            background-color: $color-black;
+        }
+        &:hover::after, &:focus::after {
+            background-color: $color-darkgrey;
+        }
+    }

@@ -32,7 +32,7 @@ ul.page-head--menus {
         visibility: visible;
     }
 
-    li.item {
+    .menu__item {
         background: url(/assets/images/menuSeparator.png) no-repeat scroll 0px 7px transparent;
         display: block;
         letter-spacing: .08em;
@@ -49,19 +49,15 @@ ul.page-head--menus {
             padding-bottom: 0;
         }
 
-
-        a {
-            color: $color-white;
-            
-            &:hover {
-                border-bottom: 1px solid $color-white;
-                text-decoration: none;
-            }
-        }
-
         &:first-child {
             background: none repeat scroll 0 0 transparent;
         }
     }
 
+    .menu__link {
+        color: $color-white;
+        &::after {
+            background-color: $color-white;
+        }
+    }
 }

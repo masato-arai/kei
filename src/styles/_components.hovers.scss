@@ -1,0 +1,14 @@
+/* =======================
+   Components/Hovers
+   ======================= */
+.hover--border-up {
+    &::after {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+
+    &:hover::after, &:focus::after {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
