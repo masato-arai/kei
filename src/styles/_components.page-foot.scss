@@ -8,6 +8,10 @@
     padding-bottom: $spacing-unit--large;
     position: relative;
     width: 100%;
+
+    &.hide {
+        display: none;
+    }
 }
 
     .page-foot__arrow {
@@ -16,6 +20,10 @@
         height: 30px;
         margin: 0 auto;
         width: 60px;
+
+        &.hide {
+            display: none;
+        }
     }
 
     .page-foot__wrapper {
