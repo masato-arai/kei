@@ -1,0 +1,11 @@
+/* =======================
+   Components/Press Links
+   ======================= */
+
+.press-link {
+    color: $color-black;
+    
+    &::after {
+        background-color: $color-black;
+    }
+}

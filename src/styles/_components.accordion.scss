@@ -51,12 +51,23 @@
                 p {
                     font-family: Garamond, Palatino Linotype, Palatino, serif;
                     margin-bottom: 0;
-                    padding-bottom: $spacing-unit--large;
+                    padding-top: $spacing-unit--tiny;
                     text-align: justify;
                 }
             }
 
-                .accordion__list {
+                .accordion__unordered-list {
                     margin-bottom: 0;
-                    padding-bottom: $spacing-unit--large;
+                    padding-top: $spacing-unit--small * 3;
+                    padding-bottom: $spacing-unit--small * 3;
                 }
+
+                    .accordion__list {
+                        margin-bottom: $spacing-unit--small;
+
+                        span {
+                            font-family: $serif;
+                            letter-spacing: .04em;
+                            @include font-size(14px, 2);
+                        }
+                    }
