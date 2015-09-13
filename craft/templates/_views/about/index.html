@@ -28,11 +28,16 @@
                 </div>
                 <div class="accordion__contents">
                     <div class="accordion__item">
-                        {% if footer.contactTwitter | length %}
-                            {% for block in footer.contactTwitter %}
-                                {{ block.twitterAccount }}q
-                            {% endfor %}
+                        {% if entry.selectedClientsDescriptions | length %}
+                            {{ entry.selectedClientsDescriptions }}
                         {% endif %}
+                        <ul class="accordion__list">
+                            {% if entry.selectedClientsList | length %}
+                                {% for block in entry.selectedClientsList %}
+                                    <li>{{ block.clientName }}</li>
+                                {% endfor %}
+                            {% endif %}
+                        </ul>
                     </div>
                 </div>
             </div>
