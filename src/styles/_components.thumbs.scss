@@ -23,6 +23,7 @@
         .thumbs__label {
             color: $color-white;
             font-weight: 500;
+            letter-spacing: 0;
             margin-bottom: 0;
-            @include font-size(12px, 1.2);
+            @include font-size(11px, 1.4);
         }
