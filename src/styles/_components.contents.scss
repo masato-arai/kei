@@ -1,0 +1,27 @@
+/* =======================
+   Components/Contents
+   ======================= */
+.hoge {
+    width: 100%;
+    background: $color-black;
+}
+
+.content {
+    margin: 0 auto;
+    max-width: $max-width;
+}
+
+    .content__video {
+        width: 100%;
+        position: relative;
+        padding: 0;
+        padding-top: 56.2%;
+    }
+
+    .content__iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
