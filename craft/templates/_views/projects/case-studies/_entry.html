@@ -4,9 +4,9 @@
     <section class="description" style="background: #{{ entry.projectColour }}">
         <div class="wrapper">
             <div class="wrapper__inner">
-                <h1>{{ entry.title }}</h1>
+                <h1 class="project-title">{{ entry.title }}</h1>
                 {% for block in entry.headerDescriptions %}
-                    <div class="layout">
+                    <div class="[ layout  layout--large ]  project-details">
                         {% if block.descriptionLeftColumn | length > 0 %}
                             <div class="layout__item  u-1/1  u-1/2-lap-and-up">
                                 {{ block.descriptionLeftColumn }}

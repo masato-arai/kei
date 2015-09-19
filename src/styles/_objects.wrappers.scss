@@ -5,13 +5,13 @@
 .wrapper {
     max-width: 100%;
     margin: 0 auto;
+    padding-left: $spacing-unit;
+    padding-right: $spacing-unit;
+
 }
 
     .wrapper__inner {
         max-width: $max-width;
         margin: 0 auto;
-        padding-top: $spacing-unit;
-        padding-bottom: $spacing-unit;
-        padding-left: $spacing-unit;
-        padding-right: $spacing-unit;
+        padding: 0 $spacing-unit;
     }

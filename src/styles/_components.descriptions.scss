@@ -2,4 +2,8 @@
    Components/Descriptions
    ======================= */
 .description {
+    padding-top: $spacing-unit--large;
+    padding-bottom: $spacing-unit--large;
+    position: relative;
+    width: 100%;
 }
