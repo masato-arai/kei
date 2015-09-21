@@ -22,16 +22,17 @@
     </section>
     <section class="main-contents">
         {% for block in entry.mainContents %}
-            {{ block }}
-            <div class="hoge">
-                <div class="content">
-                    <div class="wrapper">
-                        <div class="content__video">
-                            <iframe src="//player.vimeo.com/video/111432101?title=0&amp;byline=0&amp;portrait=0&amp;autoplay=0" frameborder="0" class="content__iframe"></iframe>
+            {% if block.type == "video" %}
+                <div class="block  block--video">
+                    <div class="content">
+                        <div class="wrapper">
+                            <div class="content__video">
+                                <iframe src="//player.vimeo.com/video/{{ block.idNumber }}?title=0&amp;byline=0&amp;portrait=0&amp;autoplay=0" frameborder="0" class="content__iframe"></iframe>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            {% endif %}
         {% endfor %}
     </section>
 {% endblock %}

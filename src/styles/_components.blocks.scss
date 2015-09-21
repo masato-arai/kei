@@ -1,0 +1,15 @@
+/* =======================
+   Components/Blocks
+   ======================= */
+.block {
+    margin-bottom: $spacing-unit--small * 1.5;
+}
+
+    .block--video {
+        width: 100%;
+        background: $color-black;
+
+        &.remove-mb {
+            margin-bottom: 0;
+        }
+    }

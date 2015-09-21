@@ -11,5 +11,6 @@ attachFastClick(document.body);
 require('./modules/hide-footer').init();
 require('./modules/home-carousel').init();
 require('./modules/toggle-menu').init();
+require('./modules/remove-mb').init();
 require('./modules/accordion').init();
 require('./modules/footer-arrow').init();
