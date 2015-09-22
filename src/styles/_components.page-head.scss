@@ -4,12 +4,13 @@
 
 .page-head {
     background: $base-background-color;
-    position: absolute;
+    position: fixed;
     top: 0;
     padding: $spacing-unit--small;
     padding-top: $spacing-unit--large;
     padding-bottom: $spacing-unit--small * 3;
     width: 100%;
+    z-index: 10000000;
     @include media-query(lap-and-up) {
         padding: $spacing-unit;
         padding-top: $spacing-unit--large;

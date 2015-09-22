@@ -33,6 +33,13 @@
                     </div>
                 </div>
             {% endif %}
+            {% if block.type == "carousel" %}
+                <div class="case-study-carousel__cell  js-flickity">
+                    {% for asset in block.slide %}
+                        <img src="{{ asset.getUrl() }}" class="case-study-carousel__img" alt="045" />
+                    {% endfor %}
+                </div>
+            {% endif %}
         {% endfor %}
     </section>
 {% endblock %}

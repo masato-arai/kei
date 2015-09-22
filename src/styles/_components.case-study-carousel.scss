@@ -1,0 +1,22 @@
+/* =======================
+   Components/Case Study Carousel
+   ======================= */
+
+.case-study-carousel {
+    overflow: hidden;
+    width: 100%; /* full width */
+    height: calc(100vh - 186px); /* height of gallery */
+    margin-right: 10px;
+}
+
+    .case-study-carousel__cell {
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        height: 100%;
+        overflow: hidden;
+    }
+
+
+        .case-study-carousel__img {
+        }
