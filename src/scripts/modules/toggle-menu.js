@@ -5,8 +5,10 @@ var toggleContent = function(e) {
     e.preventDefault();
     if (menu.hasClass('show')) {
         menu.removeClass('show');
+        toggleButton.removeClass('close');
     } else {
         menu.addClass('show');
+        toggleButton.addClass('close');
     }
     return false;
 }

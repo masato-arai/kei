@@ -13,10 +13,10 @@ ul.page-head--menus {
     padding-bottom: $spacing-unit;
     position: absolute;
     text-align: center;
+    user-select: none;
     visibility: hidden;
     width: 100%;
     z-index: 130;
-    transition: all 300ms ease;
 
     &.show {
         opacity: 1;
@@ -33,7 +33,6 @@ ul.page-head--menus {
     }
 
     .menu__item {
-        background: url(/assets/images/menuSeparator.png) no-repeat scroll 0px 7px transparent;
         display: block;
         letter-spacing: .08em;
         list-style: none;
@@ -44,6 +43,7 @@ ul.page-head--menus {
         @include font-size(15px);
 
         @include media-query(lap-and-up) {
+            background: url(/assets/images/menuSeparator.png) no-repeat scroll 0px 7px transparent;
             display:inline-block;
             padding-top: 0;
             padding-bottom: 0;

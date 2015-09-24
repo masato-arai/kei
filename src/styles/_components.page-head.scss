@@ -52,4 +52,8 @@
         &:hover {
             transform: rotate(90deg);
         }
+
+        &.close {
+            transform: rotate(225deg);
+        }
     }

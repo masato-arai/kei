@@ -34,10 +34,12 @@
                 </div>
             {% endif %}
             {% if block.type == "carousel" %}
-                <div class="case-study-carousel__cell  js-flickity">
-                    {% for asset in block.slide %}
-                        <img src="{{ asset.getUrl() }}" class="case-study-carousel__img" alt="045" />
-                    {% endfor %}
+                <div class="block">
+                    <div class="case-study-carousel__cell  js-flickity" data-flickity-options='{ "wrapAround": true }'>
+                        {% for asset in block.slide %}
+                            <img src="{{ asset.getUrl() }}" class="case-study-carousel__img" alt="045" />
+                        {% endfor %}
+                    </div>
                 </div>
             {% endif %}
         {% endfor %}

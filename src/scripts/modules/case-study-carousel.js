@@ -6,10 +6,10 @@ var init = function() {
         // element argument can be a selector string
         //   for an individual element
         var flkty = new Flickity( '.case-study-carousel', {
-            autoPlay: true,
+            autoPlay: false,
             pageDots: true,
             wrapAround: true,
-            setGallerySize: false,
+            setGallerySize: true,
             cellSelector: '.case-study-carousel__cell',
             selectedAttraction: 0.01,
             friction: 0.15
