@@ -26,9 +26,11 @@
             .accordion__header {
                 display: table;
                 width: 100%;
+/*
                 @include media-query(lap-and-up) {
                     width: auto;
                 }
+*/
             }
                 .accordion__title {
                     display: table-cell;
