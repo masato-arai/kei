@@ -8,6 +8,11 @@
     padding-left: $spacing-unit;
     padding-right: $spacing-unit;
 
+    &.wrapper--projects {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
 }
 
     .wrapper__inner {
