@@ -86,6 +86,7 @@ $inuit-enable-layout--large:        true;
 /**
  * #COMPONENTS
  */
+@import "components.loader";
 @import "components.container";
 @import "components.flickity";
 @import "components.flickity-overwrite";
