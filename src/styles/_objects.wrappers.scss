@@ -13,6 +13,11 @@
         padding-right: 0;
     }
 
+    &.wrapper--arrow {
+        height: 30px;
+        position: absolute;
+        width: 100%;
+    }
 }
 
     .wrapper__inner {

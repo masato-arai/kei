@@ -1,0 +1,24 @@
+/* =======================
+   Components/Arrows
+   ======================= */
+.arrow-wrapper {
+    bottom: -30px;
+    height: 30px;
+    position: absolute;
+    width: 100%;
+}
+
+    .arrow {
+        position: absolute;
+        width: 100%;
+        height: 30px;
+    
+        &.arrow--description {
+            cursor: pointer;
+            height: 30px;
+            left: 50%;
+            margin-left: -30px;
+            position: absolute;
+            width: 60px;
+        }
+    }

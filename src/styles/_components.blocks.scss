@@ -2,7 +2,11 @@
    Components/Blocks
    ======================= */
 .block {
-    margin-bottom: $spacing-unit--small * 1.5;
+    position: relative;
+
+    &.mb18 {
+        margin-bottom: $spacing-unit--small * 1.5;
+    }
 }
 
     .block--video {

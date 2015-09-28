@@ -14,5 +14,6 @@ require('./modules/home-carousel').init();
 require('./modules/toggle-menu').init();
 require('./modules/remove-mb').init();
 require('./modules/case-study-carousel').init();
+require('./modules/arrows-anchor-link').init();
 require('./modules/accordion').init();
 require('./modules/footer-arrow').init();

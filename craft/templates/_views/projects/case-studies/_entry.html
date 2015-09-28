@@ -18,12 +18,19 @@
                 {% endfor %}
             </div>
         </div>
-        <div class="description__arrow"></div>
+        <div class="wrapper  wrapper--arrow">
+            <div class="arrow  arrow--description" style="background: url({{ entry.headerArrow.first.getUrl() }});"></div>
+        </div>
     </section>
     <section class="main-contents">
         {% for block in entry.mainContents %}
             {% if block.type == "video" %}
-                <div class="block  block--video">
+                <div class="block  block--video  {% if block.bottomSpace == true %}mb18{% endif %}">
+                    {% if block.arrow == true %}
+                        <div class="">
+                            <div class="arrow  main-contents__arrow"></div>
+                        </div>
+                    {% endif %}
                     <div class="content">
                         <div class="wrapper">
                             <div class="content__video">
@@ -35,6 +42,11 @@
             {% endif %}
             {% if block.type == "carousel" %}
                 <div class="block">
+                    {% if block.arrow == true %}
+                        <div class="wrapper  wrapper--arrow">
+                            <div class="arrow  main-contents__arrow"></div>
+                        </div>
+                    {% endif %}
                     <div class="case-study-carousel__cell  js-flickity" data-flickity-options='{ "wrapAround": true }'>
                         {% for asset in block.slide %}
                             <img src="{{ asset.getUrl() }}" class="case-study-carousel__img" alt="045" />
