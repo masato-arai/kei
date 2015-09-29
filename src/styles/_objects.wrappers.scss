@@ -16,7 +16,13 @@
     &.wrapper--arrow {
         height: 30px;
         position: absolute;
+        top: 0;
         width: 100%;
+    }
+
+    &.wrapper--description-arrow {
+        bottom: -30px;
+        top: inherit;
     }
 }
 

@@ -18,8 +18,8 @@
                 {% endfor %}
             </div>
         </div>
-        <div class="wrapper  wrapper--arrow">
-            <div class="arrow  arrow--description" style="background: url({{ entry.headerArrow.first.getUrl() }});"></div>
+        <div class="wrapper  wrapper--arrow  wrapper--description-arrow">
+            <div class="arrow" style="background: url({{ entry.headerArrow.first.getUrl() }});"></div>
         </div>
     </section>
     <section class="main-contents">
@@ -44,7 +44,7 @@
                 <div class="block">
                     {% if block.arrow == true %}
                         <div class="wrapper  wrapper--arrow">
-                            <div class="arrow  main-contents__arrow"></div>
+                            <div class="arrow  arrow--main-contents"></div>
                         </div>
                     {% endif %}
                     <div class="case-study-carousel__cell  js-flickity" data-flickity-options='{ "wrapAround": true }'>
