@@ -1,0 +1,11 @@
+/* =======================
+   Components/Paginations
+   ======================= */
+.paginations {
+    background: $pagination-bg-color;
+    line-height:110px;
+    min-height: 100px;
+    padding-left: $spacing-unit--small;
+    padding-right: $spacing-unit--small;
+    width: 100%;
+}

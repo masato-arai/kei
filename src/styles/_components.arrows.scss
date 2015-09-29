@@ -13,4 +13,10 @@
     &.arrow--main-contents {
         background: url(/assets/images/arrow.png) no-repeat;
     }
+
+    &.arrow--page-foot {
+        background: url(/assets/images/footer-arrow.png) no-repeat;
+        top: -30px;
+        opacity: 1 !important;
+    }
 }

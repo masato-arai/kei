@@ -1,0 +1,29 @@
+/* =======================
+   Components/Entry link
+   ======================= */
+.entry__prev {
+    text-align: left;
+}
+
+.entry__next {
+    text-align: right;
+}
+
+.entry__link {
+    border-bottom: 1px solid rgba(255,255,255,0);
+    color: $color-white;
+    display: inline-block;
+    font-family: $sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    margin-top: 4px;
+    margin-left: $spacing-unit--small;
+    margin-right: $spacing-unit--small;
+    transition: all 200ms ease;
+    vertical-align: middle;
+    @include font-size(16px, 12px);
+
+    &:hover {
+        border-bottom: 1px solid rgba(255,255,255,1);
+    }
+}

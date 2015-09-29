@@ -14,18 +14,6 @@
     }
 }
 
-    .page-foot__arrow {
-        background: url(/assets/images/footer-arrow.png);
-        cursor: pointer;
-        height: 30px;
-        margin: 0 auto;
-        width: 60px;
-
-        &.hide {
-            display: none;
-        }
-    }
-
     .page-foot__wrapper {
         max-width: $max-width;
         padding-left: $spacing-unit;

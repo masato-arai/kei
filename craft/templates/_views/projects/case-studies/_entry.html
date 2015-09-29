@@ -55,5 +55,27 @@
                 </div>
             {% endif %}
         {% endfor %}
+
+        <div class="paginations">
+            {# Set parameters for prev/next elements list #}
+            {% set params = craft.entries.section('caseStudies').order('postDate') %}
+            
+            {# Get the prev/next elements #}
+            {% set prevEntry = entry.getPrev(params) %}
+            {% set nextEntry = entry.getNext(params) %}
+            <div class="layout">
+                <div class="[ layout__item  u-1/1  u-1/2-lap-and-up ]  entry__prev">
+                    {% if prevEntry %}
+                        <a href="{{ prevEntry.url }}" class="arrow-prev"><img src="/assets/images/arrow-prev.png" /></a>
+                        <a href="{{ prevEntry.url }}" class="entry__link">{{ prevEntry.title }}</a>
+                    {% endif %}
+                </div><div class="[ layout__item  u-1/1  u-1/2-lap-and-up ]  entry__next">
+                    {% if nextEntry %}
+                        <a href="{{ nextEntry.url }}" class="entry__link">{{ nextEntry.title }}</a>
+                        <a href="{{ nextEntry.url }}" class="arrow-next"><img src="/assets/images/arrow-next.png" /></a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
     </section>
 {% endblock %}

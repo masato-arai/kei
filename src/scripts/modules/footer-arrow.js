@@ -1,5 +1,5 @@
 var init = function() {
-    $('.page-foot__arrow').bind("click", function(e) {
+    $('.arrow--page-foot').bind("click", function(e) {
         e.preventDefault();
         e.stopPropagation();
         $('html').velocity("scroll", {
