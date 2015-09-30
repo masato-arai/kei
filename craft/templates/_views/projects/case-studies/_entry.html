@@ -41,15 +41,17 @@
                 </div>
             {% endif %}
             {% if block.type == "carousel" %}
-                <div class="block">
+                <div class="block  block--carousel">
                     {% if block.arrow == true %}
                         <div class="wrapper  wrapper--arrow">
                             <div class="arrow  arrow--main-contents"></div>
                         </div>
                     {% endif %}
-                    <div class="case-study-carousel__cell  js-flickity" data-flickity-options='{ "wrapAround": true }'>
+                    <div class="case-study-carousel  js-flickity" data-flickity-options='{ "wrapAround": true }'>
                         {% for asset in block.slide %}
-                            <img src="{{ asset.getUrl() }}" class="case-study-carousel__img" alt="045" />
+                            <div class="case-study-carousel__cell">
+                                <img src="{{ asset.getUrl() }}" class="case-study-carousel__img" />
+                            </div>
                         {% endfor %}
                     </div>
                 </div>
