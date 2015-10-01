@@ -24,6 +24,11 @@
         bottom: -30px;
         top: inherit;
     }
+
+    &.wrapper--two-column-text {
+        padding-top: $spacing-unit;
+        padding-bottom: $spacing-unit;
+    }
 }
 
     .wrapper__inner {
