@@ -19,9 +19,12 @@
 
 
         .case-study-carousel__img {
-            max-width: inherit;
-            width: auto;
-            max-height: 600px;
+            display: block;
+            width: 100%;
+            max-width: $max-width;
+            margin: 0 auto;
+            padding-left: $spacing-unit;
+            padding-right: $spacing-unit;
         }
 
 /*
