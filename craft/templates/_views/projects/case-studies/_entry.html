@@ -57,7 +57,7 @@
                 </div>
             {% endif %}
             {% if block.type == "twoColumnText" %}
-                <div class="block  block--two-column-text">
+                <div class="block  block--two-column-text" style="background: #{{ entry.projectColour }}">
                     {% if block.arrow == true %}
                         <div class="wrapper  wrapper--arrow">
                             <div class="arrow  arrow--main-contents"></div>
@@ -65,7 +65,7 @@
                     {% endif %}
                     <div class="content">
                         <div class="wrapper  wrapper--two-column-text">
-                            <div class="[ layout  layout--large ]">
+                            <div class="[ layout  layout--large ]  content__two-column">
                                 {% if block.leftColumn | length > 0 %}
                                     <div class="layout__item  u-1/1  u-1/2-lap-and-up">
                                         {{ block.leftColumn }}

@@ -11,3 +11,12 @@
     font-family: $serif;
     @include font-size(16px, 1.6);
 }
+
+.project-details a {
+    border-bottom: 1px solid $color-black;
+    color: inherit;
+    transition: all 200ms ease;
+    &:hover {
+        opacity: 0.5;
+    }
+}

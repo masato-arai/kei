@@ -71,3 +71,14 @@
 .flickity-page-dots {
     bottom: 40px;
 }
+
+.flickity-page-dots .dot {
+    border-radius: inherit;
+    border: 1px solid;
+    cursor: pointer;
+    width: 12px;
+    height: 12px;
+    transform: rotate(-45deg);
+    transform-origin: 0 100%;
+    margin: 0px $spacing-unit--small * 0.5;
+}
