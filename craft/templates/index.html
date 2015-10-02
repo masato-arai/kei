@@ -24,7 +24,11 @@
     <div class="home__news">
         <span class="news__title">News</span>
         <span class="news__item">
-            <a href=""  class="news__link">New work: Keiichi Matsuda X BVLGARI, Vedute Di Roma</a>
+            {% if entry.homeNews | length %}
+                {% for block in entry.homeNews %}
+                    <a href=""  class="news__link">{{ block.newsContent }}</a>
+                {% endfor %}
+            {% endif %}
         </span>
     </div>
     <div class="home-carousel">
