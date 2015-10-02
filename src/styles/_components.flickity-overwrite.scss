@@ -72,13 +72,60 @@
     bottom: 40px;
 }
 
-.flickity-page-dots .dot {
-    border-radius: inherit;
-    border: 1px solid;
-    cursor: pointer;
-    width: 12px;
-    height: 12px;
-    transform: rotate(-45deg);
-    transform-origin: 0 100%;
-    margin: 0px $spacing-unit--small * 0.5;
+
+$trapezoidborder: 30px;
+
+.case-study-carousel {
+    .flickity-prev-next-button{
+        background: transparent;
+        border-radius: inherit;
+        border-top: $trapezoidborder solid transparent; 
+        border-bottom: $trapezoidborder solid transparent; 
+        position: absolute;
+        height: 100px;
+        width: 0px;
+        padding: 0px;
+        top: 50%;
+
+        &.previous {
+            border-left: $trapezoidborder solid $base-background-color;
+            left: 0px;
+        }
+
+        &.next {
+            border-right: $trapezoidborder solid $base-background-color; 
+            right: 0;
+        }
+        
+        &:after{ 
+            content: ""; 
+            height: 0px; 
+            width: 0px; 
+            padding: 0px; 
+        }
+    }
+
+    .flickity-prev-next-button svg {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 40px;
+        height: 40px;
+    }
+
+    .flickity-prev-next-button .arrow {
+        fill: $color-white;
+    }
+
+
+    .flickity-page-dots .dot {
+        border-radius: inherit;
+        border: 1px solid;
+        cursor: pointer;
+        width: 12px;
+        height: 12px;
+        transform: rotate(-45deg);
+        transform-origin: 0 100%;
+        margin: 0px $spacing-unit--small * 0.5;
+    }
 }
