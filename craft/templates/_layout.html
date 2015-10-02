@@ -73,7 +73,7 @@
                 <div class="layout__item  u-1/1  u-1/2-lap-and-up">
                     <div class="page-foot__item  page-foot__quotes">
                         {% if footer.quotes | length %}
-                            {% for block in footer.quotes %}
+                            {% for block in footer.quotes.order('RAND()').limit(1) %}
                                 <p class="quotes">{{ block.quote }}</p>
                                 <div class="quotes  quotes--author">- {{ block.author }}</div>
                             {% endfor %}
