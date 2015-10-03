@@ -1,0 +1,32 @@
+/* =======================
+   Components/404 page
+   ======================= */
+.page-not-found {
+    background: $base-background-color;
+    display: table;
+    font-family: $sans-serif;
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100000000000;
+}
+
+    .page-not-found__title {
+        letter-spacing: 0.1em;
+        transition: all 300ms ease;
+        @include font-size(100px, 1);
+
+        @include media-query(lap-and-up) {
+            @include font-size(200px, 1);
+        }
+    }
+
+    .page-not-found__copy {
+        color: $color-white;
+        max-width: 400px;
+        margin: 0 auto $spacing-unit--large;
+        @include font-size(20px);
+    }

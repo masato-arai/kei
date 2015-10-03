@@ -1,0 +1,14 @@
+/* =======================
+   Components/Back to home
+   ======================= */
+
+.back-to-home__link {
+    border-bottom: 1px solid $color-white;
+    color: $color-white;
+    transition: all 300ms ease;
+    @include font-size(20px);
+
+    &:hover {
+        border-bottom: 1px solid transparent;
+    }
+}

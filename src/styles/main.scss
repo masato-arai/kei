@@ -86,6 +86,8 @@ $inuit-enable-layout--large:        true;
 /**
  * #COMPONENTS
  */
+@import "components.page-not-found";
+@import "components.back-to-home";
 @import "components.loader";
 @import "components.container";
 @import "components.flickity";

@@ -19,7 +19,7 @@
             </div>
         </div>
         <div class="wrapper  wrapper--arrow  wrapper--description-arrow">
-            <div id="arrow" class="arrow" style="background: url({{ entry.headerArrow.first.getUrl() }});"></div>
+            <div id="arrow" class="arrow-to-next-block" style="background: url({{ entry.headerArrow.first.getUrl() }});"></div>
         </div>
     </section>
     <section class="main-contents">
@@ -27,8 +27,8 @@
             {% if block.type == "video" %}
                 <div class="block  block--video  {% if block.bottomSpace == true %}mb18{% endif %}">
                     {% if block.arrow == true %}
-                        <div class="">
-                            <div class="arrow  main-contents__arrow"></div>
+                        <div class="wrapper  wrapper--arrow">
+                            <div class="arrow-to-next-block  main-contents__arrow"></div>
                         </div>
                     {% endif %}
                     <div class="content">
@@ -44,10 +44,10 @@
                 <div class="block  block--carousel">
                     {% if block.arrow == true %}
                         <div class="wrapper  wrapper--arrow">
-                            <div class="arrow  arrow--main-contents"></div>
+                            <div class="arrow-to-next-block  arrow--main-contents"></div>
                         </div>
                     {% endif %}
-                    <div class="case-study-carousel  js-flickity" data-flickity-options='{ "wrapAround": true }'>
+                    <div class="case-study-carousel">
                         {% for asset in block.slide %}
                             <div class="case-study-carousel__cell">
                                 <img src="{{ asset.getUrl() }}" class="case-study-carousel__img" />
@@ -60,7 +60,7 @@
                 <div class="block  block--two-column-text" style="background: #{{ entry.projectColour }}">
                     {% if block.arrow == true %}
                         <div class="wrapper  wrapper--arrow">
-                            <div class="arrow  arrow--main-contents"></div>
+                            <div class="arrow-to-next-block  arrow--main-contents"></div>
                         </div>
                     {% endif %}
                     <div class="content">

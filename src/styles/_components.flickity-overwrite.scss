@@ -103,7 +103,13 @@ $trapezoidborder: 30px;
             width: 0px; 
             padding: 0px; 
         }
+
+        &:active {
+          opacity: 1;
+        }
     }
+
+
 
     .flickity-prev-next-button svg {
         position: absolute;

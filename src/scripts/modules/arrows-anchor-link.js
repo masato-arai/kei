@@ -1,4 +1,4 @@
-var $arrow = $('.arrow');
+var $arrow = $('.arrow-to-next-block');
 var waypoints = require('waypoints');
 var headerHeight = 175;
 

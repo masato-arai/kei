@@ -11,4 +11,8 @@ section {
     &.home {
         position: relative;
     }
+
+    &.section--page-not-found {
+        background: $base-background-color;
+    }
 }
