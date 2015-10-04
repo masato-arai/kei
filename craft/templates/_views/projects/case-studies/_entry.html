@@ -19,7 +19,9 @@
             </div>
         </div>
         <div class="wrapper  wrapper--arrow  wrapper--description-arrow">
-            <div id="arrow" class="arrow-to-next-block" style="background: url({{ entry.headerArrow.first.getUrl() }});"></div>
+            {% if entry.headerArrow | length %}
+                <div id="arrow" class="arrow-to-next-block" style="background: url({{ entry.headerArrow.first.getUrl() }});"></div>
+            {% endif %}
         </div>
     </section>
     <section class="main-contents">
@@ -32,7 +34,7 @@
                         </div>
                     {% endif %}
                     <div class="content">
-                        <div class="wrapper">
+                        <div class="wrapper  wrapper--video">
                             <div class="content__video">
                                 <iframe src="//player.vimeo.com/video/{{ block.idNumber }}?title=0&amp;byline=0&amp;portrait=0&amp;autoplay=0" frameborder="0" class="content__iframe"></iframe>
                             </div>
@@ -41,7 +43,7 @@
                 </div>
             {% endif %}
             {% if block.type == "carousel" %}
-                <div class="block  block--carousel">
+                <div class="block  block--carousel  {% if block.bottomSpace == true %}mb18{% endif %}">
                     {% if block.arrow == true %}
                         <div class="wrapper  wrapper--arrow">
                             <div class="arrow-to-next-block  arrow--main-contents"></div>
@@ -57,7 +59,7 @@
                 </div>
             {% endif %}
             {% if block.type == "twoColumnText" %}
-                <div class="block  block--two-column-text" style="background: #{{ entry.projectColour }}">
+                <div class="block  block--two-column-text  {% if block.bottomSpace == true %}mb18{% endif %}" style="background: #{{ entry.projectColour }}">
                     {% if block.arrow == true %}
                         <div class="wrapper  wrapper--arrow">
                             <div class="arrow-to-next-block  arrow--main-contents"></div>
@@ -73,6 +75,22 @@
                                         {{ block.rightColumn }}
                                     </div>
                                 {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+            {% if block.type == "oneColumnText" %}
+                <div class="block  block--two-column-text  {% if block.bottomSpace == true %}mb18{% endif %}" style="background: #e5e5e5">
+                    {% if block.arrow == true %}
+                        <div class="wrapper  wrapper--arrow">
+                            <div class="arrow-to-next-block  arrow--main-contents"></div>
+                        </div>
+                    {% endif %}
+                    <div class="content">
+                        <div class="wrapper  wrapper--two-column-text">
+                            <div class="content__one-column">
+                                {{ block.text}}
                             </div>
                         </div>
                     </div>

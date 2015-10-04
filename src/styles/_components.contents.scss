@@ -24,7 +24,10 @@
     .content__two-column {
         p {
             font-family: $serif;
-            margin-bottom: 0;
+            margin-bottom: $spacing-unit;
+            @include media-query(lap-and-up) {
+                margin-bottom: 0;
+            }
         }
         a {
             border-bottom: 1px solid $color-black;
@@ -33,5 +36,25 @@
             &:hover {
                 opacity: 0.5;
             }
+        }
+        h3 {
+            display: inline-block;
+            margin-bottom: $spacing-unit--small * 1.5;
+            @include font-size(20px);
+        }
+    }
+
+    .content__one-column {
+        color: $color-black;
+
+        h1 {
+            color: $color-black;
+            @include font-size(30px);
+        }
+
+        ol li {
+            font-family: $serif;
+            list-style-type: decimal;
+            margin-bottom: $spacing-unit;
         }
     }

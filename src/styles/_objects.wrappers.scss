@@ -25,6 +25,15 @@
         top: inherit;
     }
 
+    &.wrapper--video {
+        padding-left: 0;
+        padding-right: 0;
+        @include media-query(desk + 24) {
+            padding-left: $spacing-unit;
+            padding-right: $spacing-unit;
+        }
+    }
+
     &.wrapper--two-column-text {
         padding-top: $spacing-unit--large;
         padding-bottom: $spacing-unit--large;
