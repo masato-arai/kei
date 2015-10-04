@@ -4,8 +4,10 @@
 
 .press-link {
     color: $color-black;
+    text-decoration: underline;
+    transition: all 200ms ease;
 
-    &::after {
-        background-color: $color-black;
+    &:hover {
+        opacity: 0.5;
     }
 }

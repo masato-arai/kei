@@ -7,7 +7,6 @@
 
     .accordion__wrapper {
         background: blue;
-        cursor: pointer;
         width: 100%;
         transition: all 700ms ease;
 
@@ -24,14 +23,10 @@
         }
 
             .accordion__header {
+                cursor: pointer;
                 display: table;
                 width: 100%;
                 user-select: none;
-/*
-                @include media-query(lap-and-up) {
-                    width: auto;
-                }
-*/
             }
                 .accordion__title {
                     display: table-cell;
@@ -51,6 +46,8 @@
                 }
 
             .accordion__item {
+                display: none;
+
                 p {
                     font-family: Garamond, Palatino Linotype, Palatino, serif;
                     margin-bottom: 0;

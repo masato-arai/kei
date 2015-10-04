@@ -36,7 +36,7 @@
     width: 94px !important;
     font-family: $sans-serif;
     font-weight: $normal-weight !important;
-
+    transition: all 300ms ease;
     @include media-query(palm) {
         margin: 0 auto !important;
     }

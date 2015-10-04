@@ -107,7 +107,11 @@
                             {% if entry.selectedPressList | length %}
                                 {% for block in entry.selectedPressList %}
                                     <li class="accordion__list">
-                                        <a href="{{ block.pressLink }}" target="_blank" class="press-link">{{ block.media }}</a> <span>| {{ block.feature }}</span>
+                                        {% if block.pressLink is empty %}
+                                            {{ block.media }} <span>| {{ block.feature }}</span>
+                                        {% else %}
+                                            <a href="{{ block.pressLink }}" target="_blank" class="press-link">{{ block.media }}</a> <span>| {{ block.feature }}</span>
+                                        {% endif %}
                                     </li>
                                 {% endfor %}
                             {% endif %}
