@@ -65,9 +65,9 @@
                             <div class="arrow-to-next-block  arrow--main-contents"></div>
                         </div>
                     {% endif %}
-                    <div class="content">
-                        <div class="wrapper  wrapper--two-column-text">
-                            <div class="[ layout  layout--large ]  content__two-column">
+                    <div class="wrapper  wrapper--two-column-text">
+                        <div class="wrapper__inner">
+                            <div class="[ layout  layout--huge ]  content__two-column">
                                 {% if block.leftColumn | length > 0 %}
                                     <div class="layout__item  u-1/1  u-1/2-lap-and-up">
                                         {{ block.leftColumn }}
@@ -81,14 +81,14 @@
                 </div>
             {% endif %}
             {% if block.type == "oneColumnText" %}
-                <div class="block  block--two-column-text  {% if block.bottomSpace == true %}mb18{% endif %}" style="background: #e5e5e5">
+                <div class="block  block--one-column-text  {% if block.bottomSpace == true %}mb18{% endif %}">
                     {% if block.arrow == true %}
                         <div class="wrapper  wrapper--arrow">
                             <div class="arrow-to-next-block  arrow--main-contents"></div>
                         </div>
                     {% endif %}
-                    <div class="content">
-                        <div class="wrapper  wrapper--two-column-text">
+                    <div class="wrapper  wrapper--one-column-text">
+                        <div class="wrapper__inner">
                             <div class="content__one-column">
                                 {{ block.text}}
                             </div>
@@ -106,15 +106,21 @@
             {% set prevEntry = entry.getPrev(params) %}
             {% set nextEntry = entry.getNext(params) %}
             <div class="layout">
-                <div class="[ layout__item  u-1/1  u-1/2-lap-and-up ]  entry__prev">
+                <div class="[ layout__item  u-1/1  u-1/2-lap-and-up ]  pagination__entry">
                     {% if prevEntry %}
-                        <a href="{{ prevEntry.url }}" class="arrow-prev"><img src="/assets/images/arrow-prev.png" /></a>
-                        <a href="{{ prevEntry.url }}" class="entry__link">{{ prevEntry.title }}</a>
+                        <div class="entry--pagination  entry--prev">
+                            <a href="{{ prevEntry.url }}" class="entry__link  entry__link--prev">
+                                <span class="entry__inner-link">{{ prevEntry.title }}</span>
+                            </a>
+                        </div>
                     {% endif %}
-                </div><div class="[ layout__item  u-1/1  u-1/2-lap-and-up ]  entry__next">
+                </div><div class="[ layout__item  u-1/1  u-1/2-lap-and-up ]  pagination__entry">
                     {% if nextEntry %}
-                        <a href="{{ nextEntry.url }}" class="entry__link">{{ nextEntry.title }}</a>
-                        <a href="{{ nextEntry.url }}" class="arrow-next"><img src="/assets/images/arrow-next.png" /></a>
+                        <div class="entry--pagination  entry--next">
+                            <a href="{{ nextEntry.url }}" class="entry__link  entry__link--next">
+                                <span class="entry__inner-link">{{ nextEntry.title }}</span>
+                            </a>
+                        </div>
                     {% endif %}
                 </div>
             </div>

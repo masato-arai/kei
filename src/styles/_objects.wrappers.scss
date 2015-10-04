@@ -34,7 +34,7 @@
         }
     }
 
-    &.wrapper--two-column-text {
+    &.wrapper--two-column-text, &.wrapper--one-column-text {
         padding-top: $spacing-unit--large;
         padding-bottom: $spacing-unit--large;
     }
@@ -49,5 +49,4 @@
     .wrapper__inner {
         max-width: $max-width;
         margin: 0 auto;
-        padding: 0 $spacing-unit;
     }

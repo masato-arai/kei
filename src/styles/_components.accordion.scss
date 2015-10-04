@@ -26,6 +26,7 @@
             .accordion__header {
                 display: table;
                 width: 100%;
+                user-select: none;
 /*
                 @include media-query(lap-and-up) {
                     width: auto;

@@ -4,6 +4,5 @@
 
 p {
     color: $color-black;
-    letter-spacing: .06em;
     @include font-size(14px, 2.0);
 }

@@ -74,6 +74,7 @@ $breakpoints: (
 
 $inuit-enable-layout--small:        true;
 $inuit-enable-layout--large:        true;
+$inuit-enable-layout--huge:        true;
 @import "../../node_modules/inuit-layout/objects.layout";
 @import "../../node_modules/inuit-box/objects.box";
 @import "../../node_modules/inuit-media/objects.media";

@@ -1,11 +1,17 @@
 /* =======================
    Components/Paginations
    ======================= */
+$pagination-height: 100px;
+
 .paginations {
     background: $pagination-bg-color;
-    line-height:110px;
-    min-height: 100px;
+//     line-height:110px;
+    min-height: $pagination-height;
     padding-left: $spacing-unit--small;
     padding-right: $spacing-unit--small;
     width: 100%;
 }
+
+    .pagination__entry {
+        height: $pagination-height;
+    }
