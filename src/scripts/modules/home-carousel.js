@@ -1,30 +1,29 @@
 var Flickity = require('flickity');
-var $homeCarousel = $('.home-carousel');
 
 var init = function() {
-    if($homeCarousel.length) {
-        // element argument can be a selector string
-        //   for an individual element
-        var flkty = new Flickity( '.home-carousel', {
-            autoPlay: true,
-            pageDots: false,
-            wrapAround: true,
-            setGallerySize: false,
-            cellSelector: '.home-carousel__cell',
-            selectedAttraction: 0.01,
-            friction: 0.15
-        });
+    var homeCarousel = document.querySelector('.home-carousel');
+    var newsCarousel = document.querySelector('.news__item');
+    var flkty = new Flickity( homeCarousel, {
+        autoPlay: true,
+        pageDots: false,
+        wrapAround: true,
+        setGallerySize: false,
+        cellSelector: '.home-carousel__cell',
+        selectedAttraction: 0.01,
+        friction: 0.15
+    });
     
-        var $caption = $('.caption');
-        // Flickity instance
-        var $caption = flkty.data('flickity');
-        
-        $caption.on( 'cellSelect', function() {
-            // set image caption using img's alt
-            $caption.text( flkty.selectedElement.alt )
-        });
-   
-    }
+    var flkty = new Flickity( newsCarousel, {
+        autoPlay: 5000,
+        draggable: false,
+        prevNextButtons: false,
+        pageDots: false,
+        wrapAround: true,
+        setGallerySize: true,
+        cellSelector: '.news__cell',
+        friction: 0.4
+    });
+
 }
 
 exports.init = init;

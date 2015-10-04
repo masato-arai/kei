@@ -23,24 +23,27 @@
 <section class="home">
     <div class="home__news">
         <span class="news__title">News</span>
-        <span class="news__item">
+        <div class="news__item">
             {% if entry.homeNews | length %}
                 {% for block in entry.homeNews %}
-                    <a href=""  class="news__link">{{ block.newsContent }}</a>
+                    <div class="news__cell">
+                        <a href=""  class="news__link">{{ block.newsContent }}</a>
+                    </div>
                 {% endfor %}
             {% endif %}
-        </span>
+        </div>
     </div>
     <div class="home-carousel">
         <div class="home-carousel__static-banner  captions">
             <span class="caption  caption--title">Featured Project</span>
             <span class="caption  caption--project">Hyper Reality</span>
         </div>
-
         {% if entry.homeCarousel | length %}
             {% for block in entry.homeCarousel %}
                 <div class="home-carousel__cell">
-                    <img src="{{ block.image.first().getUrl() }}" class="home-carousel__img" alt="045" />
+                    <a href="" class="home-carousel__link">
+                        <img src="{{ block.image.first().getUrl() }}" class="home-carousel__img" alt="045" />
+                    </a>
                 </div>
             {% endfor %}
         {% endif %}
