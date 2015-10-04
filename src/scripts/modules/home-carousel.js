@@ -1,12 +1,14 @@
 var Flickity = require('flickity');
 
+
+
 var init = function() {
     var homeCarousel = document.querySelector('.home-carousel');
     var newsCarousel = document.querySelector('.news__item');
     $(function() {
         var flkty = new Flickity( homeCarousel, {
             imagesLoaded: true,
-            autoPlay: 4000,
+            autoPlay: 6000,
             pageDots: false,
             wrapAround: true,
             setGallerySize: false,
@@ -14,11 +16,12 @@ var init = function() {
             selectedAttraction: 0.01,
             friction: 0.15
         });
-        $('.caption--project').text(flkty.selectedElement);
 
+        var projectName = $(flkty.selectedElement).find('.home-carousel__link').find('.home-carousel__img').attr("alt");
+        $('.caption--project').text(projectName);
         flkty.on( 'cellSelect', function() {
-            console.log(homeCarousel, flkty.selectedElement.alt);
-            $('.caption--project').text(homeCarousel, flkty.selectedElement.alt);
+            var projectName = $(flkty.selectedElement).find('.home-carousel__link').find('.home-carousel__img').attr("alt");
+            $('.caption--project').text(projectName);
         });
     });
 

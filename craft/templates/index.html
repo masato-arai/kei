@@ -40,9 +40,9 @@
         </div>
         {% if entry.homeCarousel | length %}
             {% for block in entry.homeCarousel %}
-                <div class="home-carousel__cell" alt="hoge">
+                <div class="home-carousel__cell">
                     <a href="" class="home-carousel__link">
-                        <img src="{{ block.image.first().getUrl() }}" class="home-carousel__img" alt="045" />
+                        <img src="{{ block.image.first().getUrl() }}" class="home-carousel__img" alt="{{ block.projectTitle}}" />
                     </a>
                 </div>
             {% endfor %}

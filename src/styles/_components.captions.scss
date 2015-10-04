@@ -4,8 +4,10 @@
 
 .caption {
     display: block;
-    text-transform: uppercase;
     letter-spacing: .04em;
     @include font-size(13px, 1.2);
 }
 
+.caption--title {
+    text-transform: uppercase;
+}
