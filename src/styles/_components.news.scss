@@ -22,16 +22,11 @@
     }
 
     .news__link {
+        border-bottom: 1px solid $color-black;
         color: $color-black;
         transition: all 200ms ease;
 
         &:hover {
-            color: $color-darkgrey;
-        }
-        &::after {
-            background-color: $color-black;
-        }
-        &:hover::after, &:focus::after {
-            background-color: $color-darkgrey;
+            opacity: 0.5;
         }
     }
