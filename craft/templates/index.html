@@ -36,11 +36,11 @@
     <div class="home-carousel">
         <div class="home-carousel__static-banner  captions">
             <span class="caption  caption--title">Featured Project</span>
-            <span class="caption  caption--project">Hyper Reality</span>
+            <span class="caption  caption--project">&nbsp;</span>
         </div>
         {% if entry.homeCarousel | length %}
             {% for block in entry.homeCarousel %}
-                <div class="home-carousel__cell">
+                <div class="home-carousel__cell" alt="hoge">
                     <a href="" class="home-carousel__link">
                         <img src="{{ block.image.first().getUrl() }}" class="home-carousel__img" alt="045" />
                     </a>
