@@ -5,13 +5,13 @@ var init = function() {
     if($caseStudyCarousel.length) {
         // element argument can be a selector string
         //   for an individual element
-
         var flkty = new Flickity( '.case-study-carousel', {
             autoPlay: false,
             pageDots: true,
             wrapAround: true,
             setGallerySize: true,
             cellSelector: '.case-study-carousel__cell',
+            imagesLoaded: true,
             arrowShape: { 
                 x0: 10,
                 x1: 60, y1: 50,
@@ -20,6 +20,10 @@ var init = function() {
             }
         });
 
+        var carouselImageHeight = $('.case-study-carousel__cell').height();
+        console.log(carouselImageHeight);
+        $('.flickity-viewport').css('height', carouselImageHeight + 'px');
+        console.log($('.flickity-viewport').height());
     }
 }
 
