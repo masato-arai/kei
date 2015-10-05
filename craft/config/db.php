@@ -16,14 +16,14 @@ $dev = array(
 
 $staging = array(
     'server' => 'localhost',
-    'user' => 'theneighbourhood',
-    'password' => 'Th2WnnqCU4vbsRaC',
+    'user' => 'kei',
+    'password' => 'KU27vCdNq9HUVWQe',
     'database' => 'kei_staging');
 
 $production = array(
     'server' => 'localhost',
-    'user' => 'theneighbourhood',
-    'password' => 'Th2WnnqCU4vbsRaC',
+    'user' => 'kei',
+    'password' => 'KU27vCdNq9HUVWQe',
     'database' => 'kei_production');
 
 
@@ -35,6 +35,6 @@ return array(
     'localhost' => $dev,
     '192.168.10.10' => $dev,
     'kei-staging.sekkithub.com' => $staging,
-    'kei-production.sekkithub.com' => $staging,
+    'kei-production.sekkithub.com' => $production,
     'www.km.cx' => $production
 );
