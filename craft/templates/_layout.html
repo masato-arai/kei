@@ -39,9 +39,11 @@
     <b class="[ frame  frameBottom ]"></b>
     <b class="[ frame  frameLeft ]"></b>
     <b class="[ frame  frameRight ]"></b>
+<!--
     <div class="page-loader">
         <div class="page-loader__spinner"></div>
     </div>
+-->
     <header class="page-head">
         <div class="wrapper page-head--wrapper">
             <div class="page-head--contents">
@@ -60,7 +62,11 @@
             </div>
         </div>
     </header>
-
+    <div class="pre-loader">
+        <div class="pre-loader__wrapper"></div>
+        <div class="pre-loader__section  pre-loader__section--left"></div>
+        <div class="pre-loader__section  pre-loader__section--right"></div>
+    </div>
     <div class="container">
         {% block content %}
         {% endblock %}

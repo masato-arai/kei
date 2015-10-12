@@ -1,0 +1,75 @@
+/* =======================
+   Components/Pre-loader
+   ======================= */
+.pre-loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100000000;
+}
+
+    .pre-loader__wrapper {
+        display: block;
+        position: relative;
+        left: 50%;
+        top: 50%;
+        width: 50px;
+        height: 50px;
+        margin: -25px 0 0 -25px;
+        border-radius: 50%;
+        border: 3px solid transparent;
+        border-top-color: $color-white;
+        animation: spin 1s linear infinite;
+        z-index: 1001;
+    }
+
+    @keyframes spin {
+        0%   { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    .pre-loader__section {
+        position: fixed;
+        top: 0;
+        width: 51%;
+        height: 100%;
+        background: $base-background-color;
+        z-index: 1000;
+        transform: translateX(0);
+    }
+
+    .pre-loader__section--left {
+        left: 0;
+    }
+
+    .pre-loader__section--right {
+        right: 0;
+    }
+
+    /* Loaded */
+    .loaded-contents {
+        .pre-loader {
+            visibility: hidden;
+            transform: translateY(-100%);
+            transition: all 0.3s 1s ease;
+        }
+
+        .pre-loader__wrapper {
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .pre-loader__section--left, .pre-loader__section--right {
+            transition: all 0.7s 0.3s cubic-bezier(0.645, 0.045, 0.355, 1.000);
+        }
+
+        .pre-loader__section--left {
+            transform: translateX(-100%);  
+        }
+    
+        .pre-loader__section--right {
+            transform: translateX(100%);  
+        }
+    }
