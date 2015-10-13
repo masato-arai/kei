@@ -16,7 +16,9 @@
             transition: all 200ms ease;
             
             &:hover {
-                opacity: 0;
+                @include media-query(lap-and-up) {
+                    opacity: 0;
+                }
             }
         }
 
