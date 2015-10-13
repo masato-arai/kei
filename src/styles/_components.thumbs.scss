@@ -14,7 +14,8 @@
         .thumbs__image {
             opacity: 1;
             transition: all 200ms ease;
-            
+            width: 100%;
+
             &:hover {
                 @include media-query(lap-and-up) {
                     opacity: 0;

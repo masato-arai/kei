@@ -33,7 +33,7 @@
             {% endif %}
         </div>
     </div>
-    <div class="home-carousel">
+    <div class="home-carousel  {% if craft.lj_mobiledetect.type == "phone" %}bottom-up{% endif %}">
         <div class="home-carousel__static-banner  captions">
             <span class="caption  caption--title">Featured Project</span>
             <span class="caption  caption--project"></span>

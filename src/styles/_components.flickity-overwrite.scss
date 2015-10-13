@@ -69,7 +69,10 @@
 }
 
 .flickity-page-dots {
-    bottom: 40px;
+    bottom: 20px;
+    @include media-query(mobile-and-up) {
+        bottom: 40px;
+    }
 }
 
 
