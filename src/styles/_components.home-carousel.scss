@@ -5,8 +5,11 @@
 .home-carousel {
     overflow: hidden;
     width: 100%; /* full width */
-    height: calc(100vh - 186px); /* height of gallery */
+    height: calc(100vh - 256px); /* height of gallery */
     margin-right: 10px;
+    @include media-query(mobile-and-up) {
+        height: calc(100vh - 186px); /* height of gallery */
+    }
 }
 
 
