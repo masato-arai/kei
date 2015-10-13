@@ -3,12 +3,15 @@
    ======================= */
 
 .home-carousel {
-    height: calc(100vh - 186px); /* height of gallery */
+    height: calc(100vh - 186px);
     margin-right: 10px;
     overflow: hidden;
-    width: 100%; /* full width */
+    width: 100%;
     &.bottom-up {
         height: calc(100vh - 256px);
+        @include media-query(mobile-and-up) {
+            height: calc(100vh - 186px);
+        }
     }
 }
 

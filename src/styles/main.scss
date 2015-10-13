@@ -7,8 +7,8 @@
 @import "settings.colors";
 @import "settings.max-width";
 $breakpoints: (
-        "mobile"        "screen and (max-width: 479px)",
-        "mobile-and-up" "screen and (min-width: 480px)",
+        "mobile"        "screen and (max-width: 559px)",
+        "mobile-and-up" "screen and (min-width: 560px)",
         "palm"          "screen and (max-width: 719px)",
         "lap"           "screen and (min-width: 720px) and (max-width: 1023px)",
         "lap-and-up"    "screen and (min-width: 720px)",
