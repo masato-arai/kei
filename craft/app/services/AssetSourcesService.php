@@ -6,8 +6,8 @@ namespace Craft;
  *
  * @author     Pixel & Tonic, Inc. <support@pixelandtonic.com>
  * @copyright  Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license    http://buildwithcraft.com/license Craft License Agreement
- * @see        http://buildwithcraft.com
+ * @license    http://craftcms.com/license Craft License Agreement
+ * @see        http://craftcms.com
  * @package    craft.app.services
  * @since      1.0
  * @deprecated This class will have several breaking changes in Craft 3.0.
@@ -357,19 +357,24 @@ class AssetSourcesService extends BaseApplicationComponent
 					$sourceRecord->sortOrder = $maxSortOrder + 1;
 				}
 
-				if (!$isNewSource && $oldSource->fieldLayoutId)
-				{
-					// Drop the old field layout
-					craft()->fields->deleteLayoutById($oldSource->fieldLayoutId);
-				}
-
-				// Save the new one
+				// Is there a new field layout?
 				$fieldLayout = $source->getFieldLayout();
-				craft()->fields->saveLayout($fieldLayout);
 
-				// Update the source record/model with the new layout ID
-				$source->fieldLayoutId = $fieldLayout->id;
-				$sourceRecord->fieldLayoutId = $fieldLayout->id;
+				if (!$fieldLayout->id)
+				{
+					// Delete the old one
+					if (!$isNewSource && $oldSource->fieldLayoutId)
+					{
+						craft()->fields->deleteLayoutById($oldSource->fieldLayoutId);
+					}
+
+					// Save the new one
+					craft()->fields->saveLayout($fieldLayout);
+
+					// Update the asset source record/model with the new layout ID
+					$source->fieldLayoutId = $fieldLayout->id;
+					$sourceRecord->fieldLayoutId = $fieldLayout->id;
+				}
 
 				// Save the source
 				$sourceRecord->save(false);

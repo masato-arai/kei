@@ -7,4 +7,7 @@ html {
     color: $color-white;
     font-family: $sans-serif;
     font-weight: 400;
+
+	-webkit-font-smoothing: inherit !important;
+	-moz-osx-font-smoothing: grayscale;
 }

@@ -3,11 +3,23 @@
    ======================= */
 
 @font-face {
-    font-family: 'DINMittelschriftStd';
-    url('/assets/fonts/gt-walsheim-light/DINMittelschriftStd.otf') format('otf'),
+    font-family: "DINMittelschriftStd";
+    src:  url("/assets/fonts/DINMittelschriftStd/DINMittelschriftStd.eot");
+    src:  url("/assets/fonts/DINMittelschriftStd/DINMittelschriftStd.eot?#iefix") format("embedded-opentype"),
+    url("/assets/fonts/DINMittelschriftStd/DINMittelschriftStd.woff") format("woff"),
+    url("/assets/fonts/DINMittelschriftStd/DINMittelschriftStd.ttf") format("truetype"),
+    url("/assets/fonts/DINMittelschriftStd/DINMittelschriftStd.svg#DINMittelschriftStd") format("svg");
+    font-weight: normal;
+    font-style: normal;
 }
 
 @font-face {
-    font-family: 'DINEngschriftStd';
-    url('/assets/fonts/gt-walsheim-medium/DINEngschriftStd.otf') format('otf'),
+    font-family: "DINEngschriftStd";
+    src:  url("/assets/fonts/DINMittelschriftStd/DINMittelschriftStd.eot");
+    src:  url("/assets/fonts/DINMittelschriftStd/DINMittelschriftStd.eot?#iefix") format("embedded-opentype"),
+    url("/assets/fonts/DINMittelschriftStd/DINMittelschriftStd.woff") format("woff"),
+    url("/assets/fonts/DINMittelschriftStd/DINMittelschriftStd.ttf") format("truetype"),
+    url("/assets/fonts/DINMittelschriftStd/DINMittelschriftStd.svg#DINMittelschriftStd") format("svg");
+    font-weight: normal;
+    font-style: normal;
 }

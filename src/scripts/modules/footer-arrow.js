@@ -3,7 +3,7 @@ var init = function() {
         e.preventDefault();
         e.stopPropagation();
         $('html').velocity("scroll", {
-            duration: 1500,
+            duration: 1000,
             offset: 0,
             easing: "easeInOutCubic"
         });

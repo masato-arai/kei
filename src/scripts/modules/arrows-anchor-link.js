@@ -7,7 +7,7 @@ var init = function() {
         e.preventDefault();
         e.stopPropagation();
         $(this).velocity("scroll", {
-            duration: 1500,
+            duration: 1000,
             offset: -headerHeight,
             easing: "easeInOutCubic"
         });

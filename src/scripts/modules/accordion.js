@@ -7,10 +7,10 @@ var init = function() {
         var $targetDescription =  $targetContainer.find($accordionItem).first();
 
         if(!$targetDescription.hasClass('active')) {
-            $targetDescription.velocity("slideDown", { duration: 800, easing: 'easeInOutCubic' });
+            $targetDescription.velocity("slideDown", { duration: 500, easing: 'easeInOutCubic' });
             $targetDescription.addClass('active');
         } else {
-            $targetDescription.velocity("slideUp", { duration: 800, easing: 'easeInOutCubic' });
+            $targetDescription.velocity("slideUp", { duration: 500, easing: 'easeInOutCubic' });
             $targetDescription.removeClass('active');
         }
         return false;

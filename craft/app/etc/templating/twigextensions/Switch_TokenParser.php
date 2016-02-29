@@ -8,8 +8,8 @@ namespace Craft;
  *
  * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
  * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @see       http://buildwithcraft.com
+ * @license   http://craftcms.com/license Craft License Agreement
+ * @see       http://craftcms.com
  * @package   craft.app.etc.templating.twigextensions
  * @since     1.3
  */
@@ -67,10 +67,7 @@ class Switch_TokenParser extends \Twig_TokenParser
 					$expr = $this->parser->getExpressionParser()->parseExpression();
 					$stream->expect(\Twig_Token::BLOCK_END_TYPE);
 					$body = $this->parser->subparse(array($this, 'decideIfFork'));
-					$cases[] = array(
-						'expr' => $expr,
-						'body' => $body
-					);
+					$cases[] = new \Twig_Node(array('expr' => $expr, 'body' => $body));
 					break;
 				}
 				case 'default':

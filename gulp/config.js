@@ -13,7 +13,7 @@ module.exports = {
         proxy: 'kei.app'
     },
     sass: {
-        src: src + '/styles',
+        src: src + '/styles/*.{sass,scss}',
         watch: src + '/styles/*.{sass,scss}',
         dest: dest + '/styles',
         settings: {

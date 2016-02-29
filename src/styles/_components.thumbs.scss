@@ -8,7 +8,8 @@
 
     .thumbs__item {
         display: block;
-        background-size: 100%;
+        background-size: contain;
+        background-repeat: no-repeat;
     }
 
         .thumbs__image {

@@ -6,6 +6,7 @@
 @import "settings.fonts";
 @import "settings.colors";
 @import "settings.max-width";
+@import "settings.transitions";
 $breakpoints: (
         "mobile"        "screen and (max-width: 559px)",
         "mobile-and-up" "screen and (min-width: 560px)",
@@ -56,6 +57,7 @@ $breakpoints: (
 @import "base.page";
 @import "../../node_modules/inuit-headings/base.headings";
 @import "base.type";
+@import "base.fonts";
 @import "base.links";
 @import "base.paragraph";
 @import "base.lists";
