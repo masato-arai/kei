@@ -20,10 +20,6 @@
             margin: 0 auto;
             padding-left: 0;
             padding-right: 0;
-            @include media-query(desk) {
-                padding-left: $spacing-unit;
-                padding-right: $spacing-unit;
-            }
         }
 
 .flickity-prev-next-button.previous {

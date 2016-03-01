@@ -7,6 +7,7 @@ var init = function() {
         //   for an individual element
         var flkty = new Flickity( '.case-study-carousel', {
             accessibility: false,
+            adaptiveHeight: true,
             autoPlay: false,
             pageDots: true,
             wrapAround: true,
