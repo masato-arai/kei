@@ -231,7 +231,14 @@ class PelIfd implements \IteratorAggregate, \ArrayAccess
                      * not in the entry but somewhere else, with the offset stored
                      * in the entry.
                      */
-                    $s = PelFormat::getSize($format) * $components;
+
+                    $size = PelFormat::getSize($format);
+
+                    if (!is_numeric($size)) {
+                        $size = 0;
+                    }
+
+                    $s = $size * $components;
                     if ($s > 0) {
                         $doff = $offset + 12 * $i + 8;
                         if ($s > 4) {
@@ -331,7 +338,6 @@ class PelIfd implements \IteratorAggregate, \ArrayAccess
             case self::IFD1:
             case self::EXIF:
             case self::INTEROPERABILITY:
-
                 switch ($tag) {
                     case PelTag::DATE_TIME:
                     case PelTag::DATE_TIME_ORIGINAL:
@@ -363,7 +369,13 @@ class PelIfd implements \IteratorAggregate, \ArrayAccess
                         if ($format != PelFormat::UNDEFINED) {
                             throw new PelUnexpectedFormatException($this->type, $tag, $format, PelFormat::UNDEFINED);
                         }
-                        return new PelEntryVersion($tag, $data->getBytes() / 100);
+
+                        $value = $data->getBytes();
+                        if (!is_numeric($value)) {
+                            $value = 0;
+                        }
+
+                        return new PelEntryVersion($tag, $value / 100);
 
                     case PelTag::USER_COMMENT:
                         if ($format != PelFormat::UNDEFINED) {
@@ -402,7 +414,6 @@ class PelIfd implements \IteratorAggregate, \ArrayAccess
                 }
             // This point can be reached! Continue with default.
             case self::GPS:
-
             default:
                 /* Then handle the basic formats. */
                 switch ($format) {

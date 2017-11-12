@@ -31,6 +31,11 @@ class AssetFileModel extends BaseElementModel
 	 */
 	private $_transformSource = '';
 
+	/**
+	 * @var BaseAssetSourceType
+	 */
+	private $_sourceType = null;
+
 	// Public Methods
 	// =========================================================================
 
@@ -43,7 +48,7 @@ class AssetFileModel extends BaseElementModel
 	{
 		if (isset($this->_transform))
 		{
-			return $this->getUrl();
+			return (string)$this->getUrl();
 		}
 		else
 		{
@@ -159,22 +164,25 @@ class AssetFileModel extends BaseElementModel
 			{
 				$fieldId = $matches[1];
 				$field = craft()->fields->getFieldById($fieldId);
-				$settings = $field->settings;
 
-				if ($settings['useSingleFolder'])
-				{
-					$sourceId = $settings['singleUploadLocationSource'];
-				}
-				else
-				{
-					$sourceId = $settings['defaultUploadLocationSource'];
-				}
+				if ($field) {
+					$settings = $field->settings;
 
-				$source = craft()->assetSources->getSourceById($sourceId);
+					if ($settings['useSingleFolder'])
+					{
+						$sourceId = $settings['singleUploadLocationSource'];
+					}
+					else
+					{
+						$sourceId = $settings['defaultUploadLocationSource'];
+					}
 
-				if ($source)
-				{
-					return $source->getFieldLayout();
+					$source = craft()->assetSources->getSourceById($sourceId);
+
+					if ($source)
+					{
+						return $source->getFieldLayout();
+					}
 				}
 			}
 		}
@@ -199,9 +207,9 @@ class AssetFileModel extends BaseElementModel
 	 */
 	public function getImg()
 	{
-		if ($this->kind == 'image')
+		if ($this->kind == 'image' && $this->getHasUrls())
 		{
-			$img = '<img src="'.$this->url.'" width="'.$this->getWidth().'" height="'.$this->getHeight().'" alt="'.HtmlHelper::encode($this->title).'" />';
+			$img = '<img src="'.$this->getUrl().'" width="'.$this->getWidth().'" height="'.$this->getHeight().'" alt="'.HtmlHelper::encode($this->title).'" />';
 			return TemplateHelper::getRaw($img);
 		}
 	}
@@ -244,6 +252,23 @@ class AssetFileModel extends BaseElementModel
 	 */
 	public function getUrl($transform = null)
 	{
+		if (!$this->getHasUrls())
+		{
+			return false;
+		}
+
+		if (is_array($transform))
+		{
+			if (isset($transform['width']))
+			{
+				$transform['width'] = round($transform['width']);
+			}
+			if (isset($transform['height']))
+			{
+				$transform['height'] = round($transform['height']);
+			}
+		}
+
 		if ($transform === null && isset($this->_transform))
 		{
 			$transform = $this->_transform;
@@ -280,6 +305,7 @@ class AssetFileModel extends BaseElementModel
 	 */
 	public function hasThumb()
 	{
+
 		if ($this->kind == 'image')
 		{
 			if ($this->_getHeight() && $this->_getWidth())
@@ -350,6 +376,31 @@ class AssetFileModel extends BaseElementModel
 		return $this->_getDimension('width', $transform);
 	}
 
+	/**
+	 * Returns the path to the asset, relative to the root of its asset source.
+	 *
+	 * @return string
+	 */
+	public function getPath()
+	{
+		return $this->folderPath.$this->filename;
+	}
+
+	/**
+	 * Return whether the Asset has a URL.
+	 *
+	 * @return bool
+	 */
+	public function getHasUrls()
+	{
+		if (!$this->_sourceType)
+		{
+			$this->_sourceType = craft()->assetSources->populateSourceType($this->getSource());
+		}
+
+		return $this->_sourceType->getHasUrls();
+	}
+
 	// Protected Methods
 	// =========================================================================
 
@@ -364,7 +415,7 @@ class AssetFileModel extends BaseElementModel
 			'sourceId'		=> AttributeType::Number,
 			'folderId'		=> AttributeType::Number,
 			'filename'		=> AttributeType::String,
-			'originalName'	=> AttributeType::String,
+			'folderPath'	=> AttributeType::String,
 			'kind'			=> AttributeType::String,
 			'width'			=> AttributeType::Number,
 			'height'		=> AttributeType::Number,

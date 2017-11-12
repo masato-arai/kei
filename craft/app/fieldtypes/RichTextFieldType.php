@@ -41,30 +41,29 @@ class RichTextFieldType extends BaseFieldType
 	 */
 	public function getSettingsHtml()
 	{
-		$configOptions = array('' => Craft::t('Default'));
-		$configPath = craft()->path->getConfigPath().'redactor/';
+		$columns = array(
+			'text'       => 'text (~64K)',
+			'mediumtext' => 'mediumtext (~16MB)'
+		);
 
-		if (IOHelper::folderExists($configPath))
+		$sourceOptions = array();
+		foreach (craft()->assetSources->getPublicSources() as $source)
 		{
-			$configFiles = IOHelper::getFolderContents($configPath, false, '\.json$');
-
-			if (is_array($configFiles))
-			{
-				foreach ($configFiles as $file)
-				{
-					$configOptions[IOHelper::getFileName($file)] = IOHelper::getFileName($file, false);
-				}
-			}
+			$sourceOptions[] = array('label' => HtmlHelper::encode($source->name), 'value' => $source->id);
 		}
 
-		$columns = array(
-			'text'       => Craft::t('Text (stores about 64K)'),
-			'mediumtext' => Craft::t('MediumText (stores about 4GB)')
-		);
+		$transformOptions = array();
+		foreach (craft()->assetTransforms->getAllTransforms() as $transform)
+		{
+			$transformOptions[] = array('label' => HtmlHelper::encode($transform->name), 'value' => $transform->id );
+		}
 
 		return craft()->templates->render('_components/fieldtypes/RichText/settings', array(
 			'settings' => $this->getSettings(),
-			'configOptions' => $configOptions,
+			'redactorConfigOptions' => $this->_getRedactorConfigOptions(),
+			'purifierConfigOptions' => $this->_getPurifierConfigOptions(),
+			'assetSourceOptions' => $sourceOptions,
+			'transformOptions' => $transformOptions,
 			'columns' => $columns,
 			'existing' => !empty($this->model->id),
 		));
@@ -119,32 +118,30 @@ class RichTextFieldType extends BaseFieldType
 	 */
 	public function getInputHtml($name, $value)
 	{
-		$configJs = $this->_getConfigJs();
+		$configJs = $this->_getRedactorConfigJson();
 		$this->_includeFieldResources($configJs);
 
 		$id = craft()->templates->formatInputId($name);
 		$localeId = (isset($this->element) ? $this->element->locale : craft()->language);
 
+		$settings = array(
+			'id'              => craft()->templates->namespaceInputId($id),
+			'linkOptions'     => $this->_getLinkOptions(),
+			'assetSources'    => $this->_getAssetSources(),
+			'transforms'      => $this->_getTransforms(),
+			'elementLocale'   => $localeId,
+			'redactorConfig'  => JsonHelper::decode(JsonHelper::removeComments($configJs)),
+			'redactorLang'    => static::$_redactorLang,
+		);
+
 		if (isset($this->model) && $this->model->translatable)
 		{
+			// Explicitly set the text direction
 			$locale = craft()->i18n->getLocaleData($localeId);
-			$orientation = '"'.$locale->getOrientation().'"';
-		}
-		else
-		{
-			$orientation = 'Craft.orientation';
+			$settings['direction'] = $locale->getOrientation();
 		}
 
-		craft()->templates->includeJs('new Craft.RichTextInput(' .
-			'"'.craft()->templates->namespaceInputId($id).'", ' .
-			JsonHelper::encode($this->_getSectionSources()).', ' .
-			JsonHelper::encode($this->_getCategorySources()).', ' .
-			JsonHelper::encode($this->_getAssetSources()).', ' .
-			'"'.$localeId.'", ' .
-			$orientation.', ' .
-			$configJs.', ' .
-			'"'.static::$_redactorLang.'"' .
-		');');
+		craft()->templates->includeJs('new Craft.RichTextInput('.JsonHelper::encode($settings).');');
 
 		if ($value instanceof RichTextData)
 		{
@@ -193,11 +190,7 @@ class RichTextFieldType extends BaseFieldType
 			if ($this->getSettings()->purifyHtml)
 			{
 				$purifier = new \CHtmlPurifier();
-				$purifier->setOptions(array(
-					'Attr.AllowedFrameTargets' => array('_blank'),
-					'HTML.AllowedComments' => array('pagebreak'),
-				));
-
+				$purifier->setOptions($this->_getPurifierConfig());
 				$value = $purifier->purify($value);
 			}
 
@@ -218,7 +211,23 @@ class RichTextFieldType extends BaseFieldType
 		// Find any element URLs and swap them with ref tags
 		$value = preg_replace_callback('/(href=|src=)([\'"])[^\'"#]+?(#[^\'"#]+)?(?:#|%23)(\w+):(\d+)(:'.HandleValidator::$handlePattern.')?\2/', function($matches)
 		{
-			return $matches[1].$matches[2].'{'.$matches[4].':'.$matches[5].(!empty($matches[6]) ? $matches[6] : ':url').'}'.(!empty($matches[3]) ? $matches[3] : '').$matches[2];
+			$refTag = '{'.$matches[4].':'.$matches[5].(!empty($matches[6]) ? $matches[6] : ':url').'}';
+			$hash = (!empty($matches[3]) ? $matches[3] : '');
+
+			if ($hash)
+			{
+				// Make sure that the hash isn't actually part of the parsed URL
+				// (someone's Entry URL Format could be "#{slug}", etc.)
+				$url = craft()->elements->parseRefs($refTag);
+
+				if (mb_strpos($url, $hash) !== false)
+				{
+					$hash = '';
+				}
+			}
+
+
+			return $matches[1].$matches[2].$refTag.$hash.$matches[2];
 		}, $value);
 
 		// Encode any 4-byte UTF-8 characters.
@@ -278,15 +287,67 @@ class RichTextFieldType extends BaseFieldType
 	protected function defineSettings()
 	{
 		return array(
-			'configFile'  => AttributeType::String,
-			'cleanupHtml' => array(AttributeType::Bool, 'default' => true),
-			'purifyHtml'  => array(AttributeType::Bool, 'default' => false),
-			'columnType'  => array(AttributeType::String),
+			'configFile'            => AttributeType::String,
+			'purifierConfig'        => AttributeType::String,
+			'cleanupHtml'           => array(AttributeType::Bool, 'default' => true),
+			'purifyHtml'            => array(AttributeType::Bool, 'default' => true),
+			'columnType'            => array(AttributeType::String),
+			'availableAssetSources' => AttributeType::Mixed,
+			'availableTransforms'   => AttributeType::Mixed,
 		);
 	}
 
 	// Private Methods
 	// =========================================================================
+
+	/**
+	 * Returns the link options available to the field.
+	 *
+	 * Each link option is represented by an array with the following keys:
+	 *
+	 * - `optionTitle` (required) – the user-facing option title that appears in the Link dropdown menu
+	 * - `elementType` (required) – the element type class that the option should be linking to
+	 * - `sources` (optional) – the sources that the user should be able to select elements from
+	 * - `criteria` (optional) – any specific element criteria parameters that should limit which elements the user can select
+	 * - `storageKey` (optional) – the localStorage key that should be used to store the element selector modal state (defaults to RichTextFieldType.LinkTo[ElementType])
+	 *
+	 * @return array
+	 */
+	private function _getLinkOptions()
+	{
+		$linkOptions = array();
+
+		$sectionSources = $this->_getSectionSources();
+		$categorySources = $this->_getCategorySources();
+
+		if ($sectionSources)
+		{
+			$linkOptions[] = array(
+				'optionTitle' => Craft::t('Link to an entry'),
+				'elementType' => 'Entry',
+				'sources' => $sectionSources,
+			);
+		}
+
+		if ($categorySources)
+		{
+			$linkOptions[] = array(
+				'optionTitle' => Craft::t('Link to a category'),
+				'elementType' => 'Category',
+				'sources' => $categorySources,
+			);
+		}
+
+		// Give plugins a chance to add their own
+		$allPluginLinkOptions = craft()->plugins->call('addRichTextLinkOptions', array(), true);
+
+		foreach ($allPluginLinkOptions as $pluginLinkOptions)
+		{
+			$linkOptions = array_merge($linkOptions, $pluginLinkOptions);
+		}
+
+		return $linkOptions;
+	}
 
 	/**
 	 * Get available section sources.
@@ -341,40 +402,162 @@ class RichTextFieldType extends BaseFieldType
 	}
 
 	/**
+	 * Get available Asset sources.
+	 *
 	 * @return array
 	 */
 	private function _getAssetSources()
 	{
 		$sources = array();
-		$assetSourceIds = craft()->assetSources->getAllSourceIds();
 
-		foreach ($assetSourceIds as $assetSourceId)
+		$assetSourceIds = $this->getSettings()->availableAssetSources;
+
+		if ($assetSourceIds === '*' || !$assetSourceIds)
 		{
-			$sources[] = 'asset:'.$assetSourceId;
+			$assetSourceIds = craft()->assetSources->getPublicSourceIds();
 		}
+
+		$folders = craft()->assets->findFolders(array(
+			'sourceId' => $assetSourceIds,
+			'parentId' => ':empty:'
+		));
+
+		// Sort it by source order.
+		$list = array();
+
+		foreach ($folders as $folder)
+		{
+		    $list[$folder->sourceId] = $folder->id;
+		}
+
+		foreach ($assetSourceIds as $assetSourceId) {
+		    if (isset($list[$assetSourceId])) {
+                $sources[] = 'folder:'.$list[$assetSourceId];
+            }
+        }
 
 		return $sources;
 	}
 
 	/**
-	 * Returns the Redactor config JS used by this field.
+	 * Get available Transforms.
+	 *
+	 * @return array
+	 */
+	private function _getTransforms()
+	{
+		$transforms = craft()->assetTransforms->getAllTransforms('id');
+		$settings = $this->getSettings();
+
+		$transformIds = array_flip(!empty($settings->availableTransforms) && is_array($settings->availableTransforms)? $settings->availableTransforms : array());
+		if (!empty($transformIds))
+		{
+			$transforms = array_intersect_key($transforms, $transformIds);
+		}
+
+		$transformList = array();
+		foreach ($transforms as $transform)
+		{
+			$transformList[] = (object) array('handle' => HtmlHelper::encode($transform->handle), 'name' => HtmlHelper::encode($transform->name));
+		}
+
+		return $transformList;
+	}
+
+	/**
+	 * Returns the available Redactor config options.
+	 *
+	 * @return array
+	 */
+	private function _getRedactorConfigOptions()
+	{
+		$options = array('' => Craft::t('Default'));
+		$path = craft()->path->getConfigPath().'redactor/';
+
+		if (IOHelper::folderExists($path))
+		{
+			$configFiles = IOHelper::getFolderContents($path, false, '\.json$');
+
+			if (is_array($configFiles))
+			{
+				foreach ($configFiles as $file)
+				{
+					$options[IOHelper::getFileName($file)] = IOHelper::getFileName($file, false);
+				}
+			}
+		}
+
+		return $options;
+	}
+
+	/**
+	 * Returns the Redactor config JSON used by this field.
 	 *
 	 * @return string
 	 */
-	private function _getConfigJs()
+	private function _getRedactorConfigJson()
 	{
 		if ($this->getSettings()->configFile)
 		{
 			$configPath = craft()->path->getConfigPath().'redactor/'.$this->getSettings()->configFile;
-			$js = IOHelper::getFileContents($configPath);
+			$json = IOHelper::getFileContents($configPath);
 		}
 
-		if (empty($js))
+		if (empty($json))
 		{
-			$js = '{}';
+			$json = '{}';
 		}
 
-		return $js;
+		return $json;
+	}
+
+	/**
+	 * Returns the available HTML Purifier config options.
+	 *
+	 * @return array
+	 */
+	private function _getPurifierConfigOptions()
+	{
+		$options = array('' => Craft::t('Default'));
+		$path = craft()->path->getConfigPath().'htmlpurifier/';
+
+		if (IOHelper::folderExists($path))
+		{
+			$configFiles = IOHelper::getFolderContents($path, false, '\.json$');
+
+			if (is_array($configFiles))
+			{
+				foreach ($configFiles as $file)
+				{
+					$options[IOHelper::getFileName($file)] = IOHelper::getFileName($file, false);
+				}
+			}
+		}
+
+		return $options;
+	}
+
+	/**
+	 * Returns the HTML Purifier config used by this field.
+	 *
+	 * @return array
+	 */
+	private function _getPurifierConfig()
+	{
+		$file = $this->getSettings()->purifierConfig;
+		$path = craft()->path->getConfigPath().'htmlpurifier/'.$file;
+
+		if (!$file || !IOHelper::fileExists($path))
+		{
+			return array(
+				'Attr.AllowedFrameTargets' => array('_blank'),
+				'HTML.AllowedComments' => array('pagebreak'),
+			);
+		}
+
+		$json = IOHelper::getFileContents($path);
+
+		return JsonHelper::decode($json);
 	}
 
 	/**
@@ -386,11 +569,9 @@ class RichTextFieldType extends BaseFieldType
 	 */
 	private function _includeFieldResources($configJs)
 	{
-		craft()->templates->includeCssResource('lib/redactor/redactor.css');
+		craft()->templates->includeCssResource('lib/redactor/redactor.min.css');
 
-		// Gotta use the uncompressed Redactor JS until the compressed one gets our Live Preview menu fix
-		craft()->templates->includeJsResource('lib/redactor/redactor.js');
-		//craft()->templates->includeJsResource('lib/redactor/redactor'.(craft()->config->get('useCompressedJs') ? '.min' : '').'.js');
+		craft()->templates->includeJsResource('lib/redactor/redactor'.(craft()->config->get('useCompressedJs') ? '.min' : '').'.js');
 
 		$this->_maybeIncludeRedactorPlugin($configJs, 'fullscreen', false);
 		$this->_maybeIncludeRedactorPlugin($configJs, 'source|html', false);
