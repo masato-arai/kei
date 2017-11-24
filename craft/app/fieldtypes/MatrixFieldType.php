@@ -11,7 +11,7 @@ namespace Craft;
  * @package   craft.app.fieldtypes
  * @since     1.3
  */
-class MatrixFieldType extends BaseFieldType
+class MatrixFieldType extends BaseFieldType implements IEagerLoadingFieldType
 {
 	// Public Methods
 	// =========================================================================
@@ -196,10 +196,19 @@ class MatrixFieldType extends BaseFieldType
 
 			if (is_array($value))
 			{
+				$isLivePreview = craft()->request->isLivePreview();
+				$blocks = array();
 				$prevElement = null;
 
 				foreach ($value as $element)
 				{
+					// Skip disabled blocks on Live Preview requests
+					if ($isLivePreview && !$element->enabled) {
+						continue;
+					}
+
+					$blocks[] = $element;
+
 					if ($prevElement)
 					{
 						$prevElement->setNext($element);
@@ -209,7 +218,7 @@ class MatrixFieldType extends BaseFieldType
 					$prevElement = $element;
 				}
 
-				$criteria->setMatchedElements($value);
+				$criteria->setMatchedElements($blocks);
 			}
 			else if ($value === '')
 			{
@@ -264,6 +273,10 @@ class MatrixFieldType extends BaseFieldType
 	{
 		$id = craft()->templates->formatInputId($name);
 		$settings = $this->getSettings();
+
+		if ($this->element !== null && $this->element->hasEagerLoadedElements($name)) {
+			$value = $this->element->getEagerLoadedElements($name);
+		}
 
 		if ($value instanceof ElementCriteriaModel)
 		{
@@ -548,6 +561,41 @@ class MatrixFieldType extends BaseFieldType
 		}
 	}
 
+	/**
+	 * @inheritDoc IEagerLoadingFieldType::getEagerLoadingMap()
+	 *
+	 * @param BaseElementModel[]  $sourceElements
+	 *
+	 * @return array|false
+	 */
+	public function getEagerLoadingMap($sourceElements)
+	{
+		// Get the source element IDs
+		$sourceElementIds = array();
+
+		foreach ($sourceElements as $sourceElement)
+		{
+			$sourceElementIds[] = $sourceElement->id;
+		}
+
+		// Return any relation data on these elements, defined with this field
+		$map = craft()->db->createCommand()
+			->select('ownerId as source, id as target')
+			->from('matrixblocks')
+			->where(
+				array('and', 'fieldId=:fieldId', array('in', 'ownerId', $sourceElementIds)),
+				array(':fieldId' => $this->model->id)
+			)
+			->order('sortOrder')
+			->queryAll();
+
+		return array(
+			'elementType' => 'MatrixBlock',
+			'map' => $map,
+			'criteria' => array('fieldId' => $this->model->id)
+		);
+	}
+
 	// Protected Methods
 	// =========================================================================
 
@@ -651,7 +699,8 @@ class MatrixFieldType extends BaseFieldType
 
 			$bodyHtml = craft()->templates->namespaceInputs(craft()->templates->render('_includes/fields', array(
 				'namespace' => null,
-				'fields'    => $fieldLayoutFields
+				'fields'    => $fieldLayoutFields,
+				'element'   => $block,
 			)));
 
 			// Reset $_isFresh's

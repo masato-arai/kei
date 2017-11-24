@@ -31,7 +31,7 @@ class AssetFolderModel extends BaseModel
 	 */
 	public function __toString()
 	{
-		return $this->name;
+		return (string)$this->name;
 	}
 
 	/**
@@ -55,6 +55,16 @@ class AssetFolderModel extends BaseModel
 		}
 
 		return $this->_children;
+	}
+
+	/**
+	 * Manually set the child folders.
+	 *
+	 * @param array $children
+	 */
+	public function setChildren(array $children)
+	{
+		$this->_children = $children;
 	}
 
 	/**

@@ -266,27 +266,48 @@ class AssetsService extends BaseApplicationComponent
 	}
 
 	/**
-	 * Get the folder tree for Assets by source ids
+	 * Get the folder tree for Assets by source ids, optionally filtered by additional criteria
 	 *
-	 * @param $allowedSourceIds
+	 * @param array $allowedSourceIds an array  of allowed source ids
+	 * @param array $additionalCriteria an array of additional criteria
 	 *
 	 * @return array
 	 */
-	public function getFolderTreeBySourceIds($allowedSourceIds)
+	public function getFolderTreeBySourceIds(array $allowedSourceIds, array $additionalCriteria = array())
 	{
 		if (empty($allowedSourceIds))
 		{
 			return array();
 		}
 
-		$folders = $this->findFolders(array('sourceId' => $allowedSourceIds, 'order' => 'path'));
-		$tree = $this->_getFolderTreeByFolders($folders);
+		static $sourceFolders = array();
+
+		$tree = array();
+
+		// Get the tree for each source
+		foreach ($allowedSourceIds as $sourceId)
+		{
+			// Add additional criteria but prevent overriding sourceId and order.
+			$criteria = array_merge($additionalCriteria, array('sourceId' => $sourceId, 'order' => 'path'));
+
+			$cacheKey = md5(json_encode($criteria));
+
+			// If this has not been yet fetched, fetch it.
+			if (empty($sourceFolders[$cacheKey]))
+			{
+				$folders = $this->findFolders($criteria);
+				$subTree = $this->_getFolderTreeByFolders($folders);
+				$sourceFolders[$cacheKey] = reset($subTree);
+			}
+
+			$tree[$sourceId] = $sourceFolders[$cacheKey];
+		}
 
 		$sort = array();
 
-		foreach ($tree as $topFolder)
+		foreach ($tree as $sourceId => $folders)
 		{
-			$sort[] = craft()->assetSources->getSourceById($topFolder->sourceId)->sortOrder;
+			$sort[] = craft()->assetSources->getSourceById($sourceId)->sortOrder;
 		}
 
 		array_multisort($sort, $tree);
@@ -331,13 +352,25 @@ class AssetsService extends BaseApplicationComponent
 
 		$folder = $this->findFolder($folderCriteria);
 
-		if (!$folder)
-		{
-			$folder = new AssetFolderModel();
-			$folder->parentId = $sourceTopFolder->id;
-			$folder->name = $folderName;
-			$folder->id = $this->storeFolder($folder);
-		}
+        if (!$folder)
+        {
+            $response = $this->createFolder($sourceTopFolder->id, $folderName);
+
+            if ($response->isConflict() || $response->isError()) {
+                // If folder doesn't exist in DB, but we can't create it, it probably exists on the server.
+                $folder = new AssetFolderModel(
+                    array(
+                        'parentId' => $sourceTopFolder->id,
+                        'name' => $folderName,
+                        'sourceId' => null,
+                        'path' => $folderName.'/'
+                    )
+                );
+                $folder->id = craft()->assets->storeFolder($folder);
+            } else {
+                $folder = $this->getFolderById($response->getDataItem('folderId'));
+            }
+        }
 
 		return $folder;
 	}
@@ -984,7 +1017,14 @@ class AssetsService extends BaseApplicationComponent
 				craft()->assetTransforms->storeTransformIndexData($index);
 
 				// Generate the transform
-				craft()->assetTransforms->generateTransform($index);
+				try {
+					craft()->assetTransforms->generateTransform($index);
+				} catch (Exception $e) {
+					// If it failed, log the error, delete transform index and generate a 404.
+					Craft::log($e->getMessage(), LogLevel::Warning, true);
+					craft()->assetTransforms->deleteTransformIndex($index->id);
+					return UrlHelper::getResourceUrl('404');
+				}
 
 				// Update the index
 				$index->fileExists = true;
@@ -1218,13 +1258,19 @@ class AssetsService extends BaseApplicationComponent
 	 *
 	 * @return array
 	 */
-	private function _getFolderTreeByFolders($folders)
+	private function _getFolderTreeByFolders(array $folders)
 	{
 		$tree = array();
 		$referenceStore = array();
 
+		/**
+		 * @var AssetFolderModel $folder
+		 */
 		foreach ($folders as $folder)
 		{
+			// Since we'll be pre-loading the children, prevent getChildren() form triggering a query.
+			$folder->setChildren(array());
+
 			if ($folder->parentId && isset($referenceStore[$folder->parentId]))
 			{
 				$referenceStore[$folder->parentId]->addChild($folder);
@@ -1236,15 +1282,6 @@ class AssetsService extends BaseApplicationComponent
 
 			$referenceStore[$folder->id] = $folder;
 		}
-
-		$sort = array();
-
-		foreach ($tree as $topFolder)
-		{
-			$sort[] = craft()->assetSources->getSourceById($topFolder->sourceId)->sortOrder;
-		}
-
-		array_multisort($sort, $tree);
 
 		return $tree;
 	}
@@ -1346,8 +1383,7 @@ class AssetsService extends BaseApplicationComponent
 	{
 
 		$theNewFile = $this->getFileById($theNewFileId);
-		$folder = $theNewFile->getFolder();
-		$source = craft()->assetSources->getSourceTypeById($folder->sourceId);
+		$source = craft()->assetSources->getSourceTypeById($theNewFile->sourceId);
 
 		$fileId = null;
 
@@ -1357,7 +1393,7 @@ class AssetsService extends BaseApplicationComponent
 			{
 				// Replace the actual file
 				$targetFile = $this->findFile(array(
-					'folderId' => $folder->id,
+					'folderId' => $theNewFile->folderId,
 					'filename' => $fileName
 				));
 
@@ -1366,8 +1402,8 @@ class AssetsService extends BaseApplicationComponent
 				if (!$targetFile)
 				{
 					$targetFile = new AssetFileModel();
-					$targetFile->sourceId = $folder->sourceId;
-					$targetFile->folderId = $folder->id;
+					$targetFile->sourceId = $theNewFile->sourceId;
+					$targetFile->folderId = $theNewFile->folderId;
 					$targetFile->filename = $fileName;
 					$targetFile->kind = IOHelper::getFileKind(IOHelper::getExtension($fileName));
 					$this->storeFile($targetFile);
@@ -1375,7 +1411,12 @@ class AssetsService extends BaseApplicationComponent
 
 				$source->replaceFile($targetFile, $theNewFile);
 				$fileId = $targetFile->id;
-			}
+
+                // Fire an 'onReplaceFile' event
+                craft()->assets->onReplaceFile(new Event($this, array(
+                    'asset' => $targetFile
+                )));
+            }
 			// Falling through to delete the file
 			case AssetConflictResolution::Cancel:
 			{

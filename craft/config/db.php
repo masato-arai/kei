@@ -10,8 +10,8 @@
 
 $dev = array(
     'server' => 'localhost',
-    'user' => 'homestead',
-    'password' => 'secret',
+    'user' => 'root',
+    'password' => '',
     'database' => 'kei_dev');
 
 $staging = array(
@@ -31,10 +31,10 @@ return array(
     '*' => array(
         'tablePrefix' => 'craft',
     ),
-    '.app' => $dev,
+    '.dev' => $dev,
     'localhost' => $dev,
     '192.168.10.10' => $dev,
     'kei-staging.sekkithub.com' => $staging,
     'kei-production.sekkithub.com' => $production,
-    'www.km.cx' => $production
+    'km.cx' => $production
 );

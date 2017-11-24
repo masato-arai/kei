@@ -1,6 +1,6 @@
 var init = function() {
     $(window).load(function() {
-        $(".page-loader").velocity("fadeOut", { duration: 400 });
+        $(".page-loader").velocity("fadeOut", { duration: 200 });
     })
 }
 

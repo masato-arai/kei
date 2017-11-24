@@ -26,14 +26,24 @@ class AssetsHelper
 	 *
 	 * @param string $extension extension to use. "tmp" by default.
 	 *
+	 * @param bool   $suppressErrors
+	 *
 	 * @return mixed
+	 * @throws Exception
 	 */
-	public static function getTempFilePath($extension = 'tmp')
+	public static function getTempFilePath($extension = 'tmp', $suppressErrors = false)
 	{
 		$extension = strpos($extension, '.') !== false ? pathinfo($extension, PATHINFO_EXTENSION) : $extension;
 		$fileName = uniqid('assets', true).'.'.$extension;
 
-		return IOHelper::createFile(craft()->path->getTempPath().$fileName)->getRealPath();
+		$filePath = IOHelper::createFile(craft()->path->getTempPath().$fileName, $suppressErrors);
+
+		if (!$filePath)
+		{
+			throw new Exception('There was a problem generating a temporary file path.');
+		}
+
+		return $filePath->getRealPath();
 	}
 
 	/**
@@ -47,7 +57,7 @@ class AssetsHelper
 	public static function generateUrl(BaseAssetSourceType $sourceType, AssetFileModel $file)
 	{
 		$baseUrl = $sourceType->getBaseUrl();
-		$folderPath = $file->getFolder()->path;
+		$folderPath = $file->folderPath;
 		$fileName = $file->filename;
 		$appendix = static::getUrlAppendix($sourceType, $file);
 
@@ -78,12 +88,14 @@ class AssetsHelper
 	 * Clean an Asset's filename.
 	 *
 	 * @param $name
-	 * @param bool $isFilename if set to true (default), will separate extension
-	 *                         and clean the filename separately.
+	 * @param bool $isFilename         if set to true (default), will separate extension
+	 *                                 and clean the filename separately.
+	 * @param bool $preventPluginHooks if set to true, will prevent plugins from modifying
+	 *                                 the asset name.
 	 *
 	 * @return mixed
 	 */
-	public static function cleanAssetName($name, $isFilename = true)
+	public static function cleanAssetName($name, $isFilename = true, $preventPluginModifications = false)
 	{
 		if ($isFilename)
 		{
@@ -101,6 +113,14 @@ class AssetsHelper
 		if (!is_string($separator))
 		{
 			$separator = null;
+		}
+
+		if (!$preventPluginModifications)
+		{
+			$pluginModifiedAssetName = craft()->plugins->callFirst('modifyAssetFilename', array($baseName), true);
+
+			// Use the plugin-modified name, if anyone was up to the task.
+			$baseName = $pluginModifiedAssetName ?: $baseName;
 		}
 
 		$baseName = IOHelper::cleanFilename($baseName, craft()->config->get('convertFilenamesToAscii'), $separator);
