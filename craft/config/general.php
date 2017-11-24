@@ -12,7 +12,8 @@ return array(
         'omitScriptNameInUrls' => true,
         'generateTransformsAfterPageLoad' => false,
         'allowAutoUpdates' => false,
-        'defaultImageQuality' => 85
+        'defaultImageQuality' => 85,
+        'cpTrigger' => 'cp',
     ),
 
     'localhost' => array(
@@ -21,17 +22,22 @@ return array(
         'environment' => 'dev'
     ),
 
-    '.app' => array(
+    '.dev' => array(
         'devMode' => true,
-        'siteUrl' => 'http://kei.app',
+        'siteUrl' => 'http://kei.dev',
         'environment' => 'dev'
     ),
-    
+
     'kei-staging.sekkithub.com' => array(
-        'devMode' => true,
         'cooldownDuration' => 0,
         'siteUrl' => 'http://kei-staging.sekkithub.com',
         'environment' => 'staging'
+    ),
+
+    'kei-production.sekkithub.com' => array(
+        'cooldownDuration' => 0,
+        'siteUrl' => 'http://kei-production.sekkithub.com',
+        'environment' => 'production'
     ),
 
     'www.km.cx' => array(

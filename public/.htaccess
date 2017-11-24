@@ -6,7 +6,7 @@
 
 # ------------------------------------------------------------
 # MANAGE UPDATES & SITE OFFLINE
-# Update and uncomment these rules when we need to work on the site 
+# Update and uncomment these rules when we need to work on the site
 # while serving an offline message to visitors. Add permitted IPs as needed.
 # ------------------------------------------------------------
 
@@ -26,7 +26,7 @@
 # To generate a new htpassword run this line on the command line:
 # htpasswd -nb username password
 # ----------------------------------------------------------------------
- 
+
 # SetEnvIf Host local.craft staging
 # AuthType Basic
 # AuthName "Under Construction"
@@ -91,7 +91,7 @@ AddType application/x-shockwave-flash       swf
 
 <IfModule mod_deflate.c>
 
-  # Force deflate for mangled headers 
+  # Force deflate for mangled headers
   # developer.yahoo.com/blogs/ydn/posts/2010/12/pushing-beyond-gzipping/
    <IfModule mod_setenvif.c>
      <IfModule mod_headers.c>
@@ -262,7 +262,7 @@ AddType application/x-shockwave-flash       swf
   RewriteCond %{HTTP_HOST} !^kei-production.sekkithub.com [NC]
   RewriteCond %{HTTP_HOST} !^kei-staging.sekkithub.com [NC]
   RewriteCond %{HTTP_HOST} !^km.cx [NC]
-  RewriteCond %{HTTP_HOST} !^kei.app [NC]
+  RewriteCond %{HTTP_HOST} !^kei.dev [NC]
   RewriteCond %{HTTP_HOST} !^www\. [NC]
   RewriteRule ^ http://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
@@ -350,8 +350,8 @@ AddType application/x-shockwave-flash       swf
    php_value session.cookie_httponly true
  </IfModule>
 
-# Hide .git and _svn folders so they cannot be accessed 
-# But you shouldn't upload them in the first place 
+# Hide .git and _svn folders so they cannot be accessed
+# But you shouldn't upload them in the first place
  <IfModule mod_rewrite.c>
   RewriteRule ^(.*/)*_svn/ / [F,L]
   RewriteRule ^(.*/)*\.git/ / [F,L]
@@ -363,7 +363,7 @@ AddType application/x-shockwave-flash       swf
 # When necessary use rewrite rules like this so that they work in all environments
 # These rules must come before removal of index.php from the URL
 #
-# Make sure the following rules come before this one: 
+# Make sure the following rules come before this one:
 RewriteEngine on
 RewriteBase /
 #
