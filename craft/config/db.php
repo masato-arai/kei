@@ -31,7 +31,7 @@ return array(
     '*' => array(
         'tablePrefix' => 'craft',
     ),
-    '.dev' => $dev,
+    '.test' => $dev,
     'localhost' => $dev,
     '192.168.10.10' => $dev,
     'kei-staging.sekkithub.com' => $staging,

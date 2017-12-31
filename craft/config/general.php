@@ -22,9 +22,9 @@ return array(
         'environment' => 'dev'
     ),
 
-    '.dev' => array(
+    '.test' => array(
         'devMode' => true,
-        'siteUrl' => 'http://kei.dev',
+        'siteUrl' => 'http://kei.test',
         'environment' => 'dev'
     ),
 
@@ -40,9 +40,9 @@ return array(
         'environment' => 'production'
     ),
 
-    'www.km.cx' => array(
+    'km.cx' => array(
         'cooldownDuration' => 0,
-        'siteUrl' => 'http://www.km.cx',
+        'siteUrl' => 'http://km.cx',
         'environment' => 'production'
     ),
 );
