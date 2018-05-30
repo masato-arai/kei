@@ -26,7 +26,7 @@
     </section>
     <section class="main-contents">
         {% for block in entry.mainContents %}
-            {% if block.type == "video" %}
+            {% if block.type == "vimeo" %}
                 <div class="block  block--video  {% if block.bottomSpace == true %}mb18{% endif %}">
                     {% if block.arrow == true %}
                         <div class="wrapper  wrapper--arrow">
@@ -37,6 +37,22 @@
                         <div class="wrapper  wrapper--video">
                             <div class="content__video">
                                 <iframe src="//player.vimeo.com/video/{{ block.idNumber }}?title=0&amp;byline=0&amp;portrait=0&amp;autoplay=0" frameborder="0" class="content__iframe"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+            {% if block.type == "youtube" %}
+                <div class="block  block--video  {% if block.bottomSpace == true %}mb18{% endif %}">
+                    {% if block.arrow == true %}
+                        <div class="wrapper  wrapper--arrow">
+                            <div class="arrow-to-next-block  main-contents__arrow"></div>
+                        </div>
+                    {% endif %}
+                    <div class="content">
+                        <div class="wrapper  wrapper--video">
+                            <div class="content__video">
+                                <iframe src="https://www.youtube.com/embed/{{ block.idNumber }}?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen class="content__iframe"></iframe>
                             </div>
                         </div>
                     </div>
@@ -101,7 +117,7 @@
         <div class="paginations">
             {# Set parameters for prev/next elements list #}
             {% set params = craft.entries.section('caseStudies').order('postDate') %}
-            
+
             {# Get the prev/next elements #}
             {% set prevEntry = entry.getPrev(params) %}
             {% set nextEntry = entry.getNext(params) %}
