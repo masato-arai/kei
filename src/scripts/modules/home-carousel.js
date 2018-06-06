@@ -29,7 +29,7 @@ var init = function() {
     });
 
     var flkty = new Flickity(newsCarousel, {
-      autoPlay: 4000,
+      autoPlay: 2000,
       draggable: false,
       prevNextButtons: false,
       pageDots: false,
